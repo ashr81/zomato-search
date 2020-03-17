@@ -10,6 +10,7 @@ const BlurredImage = styled(Image)`
   top: 0px;
   left: 0px;
   filter: blur(6px);
+  z-index: 3;
 `
 
 const LocationSearchBackground = () => {
