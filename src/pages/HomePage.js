@@ -1,11 +1,9 @@
 import React from 'react';
-import { Flex } from '../components/atoms';
+import Home from '../components/templates/Home';
 
 const HomePage = () => {
     return (
-        <Flex>
-            HomePage
-        </Flex>
+        <Home />
     )
 }
 

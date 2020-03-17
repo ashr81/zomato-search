@@ -6,6 +6,7 @@ import { normal } from './themes';
 import NotFoundPage from './pages/error/NotFoundPage';
 import Layout from './components/organisms/Layout';
 import Navbar from './components/organisms/Navbar';
+import withLocationDetails from './hocs/withLocationDetails';
 
 const App = () => {
   const [theme, updateTheme] = useState(normal)
@@ -23,4 +24,4 @@ const App = () => {
   );
 }
 
-export default App;
+export default withLocationDetails(App);

@@ -7,7 +7,7 @@ import { Route } from 'react-router-dom';
 
 const HomePage = lazy(() => import('../pages/HomePage'));
 
-export const HOME = '/HOME';
+export const HOME = '/';
 
 export default [
   {path: HOME, component: HomePage, exact: true}
