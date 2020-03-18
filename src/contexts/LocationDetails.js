@@ -5,6 +5,6 @@
  */
 import {createContext} from 'react'
 
-export const LocationDetailsContext = createContext(null)
+export const LocationDetailsContext = createContext({})
 
 export default LocationDetailsContext

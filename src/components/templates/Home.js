@@ -1,12 +1,15 @@
 import React from 'react';
-import LocationSearchBackground from '../organisms/LocationSearchBackground';
+import { Flex } from '../atoms';
+import LocationModal from '../organisms/LocationModal';
 
 const Home = ({
 
 }) => {
-    return (
-        <LocationSearchBackground/>
-    )
+  return (
+    <Flex>
+      <LocationModal />
+    </Flex>
+  )
 }
 
 export default Home;

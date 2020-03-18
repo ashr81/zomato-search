@@ -17,7 +17,9 @@ const colors = {
     toggleSwitchBg: '#045bc7',
     navbarBg: '#0464dd',
     navbarColor: '#FFF',
-    textColor: '#FFF'
+    textColor: '#FFF',
+    modalOverlayBg: '#000',
+    modalBg: '#fff'
   }
   
   export default colors;

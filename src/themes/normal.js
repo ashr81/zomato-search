@@ -17,17 +17,35 @@ export const colors = {
     toggleSwitchBg: '#045bc7',
     navbarBg: '#000000',
     navbarColor: '#F7F7F8',
-    textColor: '#000000'
+    textColor: '#000000',
+    modalOverlayBg: '#000',
+    modalBg: '#fff',
+    inputPrefixBg: '#fff'
   }
   
   export default {
     breakpoints: ['600px', '900px', '1200px', '1800px'],
-    space: [0, 2, 4, 8, 12, 16, 24, 30, 26, 48, 64, 128],
+    space: [0, 2, 4, 8, 12, 16, 24, 30, 26, 48, 64, 96, 128],
     sizes: [0, 4, 8, 20, 40, 100, 200, 300, 500],
     fontSizes: [10, 12, 14, 16, 18, 24, 30, 36, 72],
     buttons: {
       primary: {
         backgroundColor: colors.primaryBtnBg,
+        color: colors.primaryBtnColor,
+        borderStyle: 'none',
+        borderRadius: 3,
+        borderWidth: '2px',
+        "&:disabled": {
+          backgroundColor: colors.primaryBtnDisabledBg,
+          color: colors.primaryBtnDisabledColor,
+          borderStyle: 'solid',
+        },
+        "&:hover": {
+          backgroundColor: colors.primaryBtnHoverBg
+        }
+      },
+      danger: {
+        backgroundColor: colors.danger,
         color: colors.primaryBtnColor,
         borderStyle: 'none',
         borderRadius: 3,
