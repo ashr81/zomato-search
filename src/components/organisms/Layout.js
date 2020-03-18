@@ -24,7 +24,11 @@ const Layout = ({ children, changeTheme }) => {
   return (
     <Flex flexDirection='column' backgroundColor='layoutBg' minHeight='100vh' alignItems='center' pt={[0, 6]}>
       <Flex width='100%' justifyContent='flex-end' mr={7} my={[5, 0]}>
-        <ToggleSwitch checked={mode === 'night'} onChange={onModeChange}/>
+        <ToggleSwitch
+          checked={mode === 'night'}
+          onChange={onModeChange}
+          pseudoElementsContent={{before: '🌝', after: '🌜'}}
+        />
       </Flex>
       {children}
     </Flex>

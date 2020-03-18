@@ -7,11 +7,12 @@ import { Flex } from '../atoms';
 
 const ToggleSwitchContainer = styled(Flex)`
   position: relative;
-  width: 50px;
+  min-width: 50px;
+  max-width: 50px;
   height: 24px;
   cursor: pointer;
   &:before {
-    content: '🌝';
+    content: '${({ pseudoElementsContent }) => pseudoElementsContent.before}';
     position: absolute;
     top: 0px;
     right: 0px;
@@ -19,7 +20,7 @@ const ToggleSwitchContainer = styled(Flex)`
     ${({ checked }) => checked === true && css`display: none;`}
   }
   &:after {
-    content: '🌜';
+    content: '${({ pseudoElementsContent }) => pseudoElementsContent.after}';
     position: absolute;
     top: 0px;
     left: 0px;
@@ -72,15 +73,21 @@ const CheckboxHidden = styled.input.attrs(() => ({ type: 'checkbox' }))`
 `
 
 const ToggleSwitch = ({
-  checked, onChange
+  checked, onChange, pseudoElementsContent
 }) => {
   return (
-    <ToggleSwitchContainer checked={checked}>
+    <ToggleSwitchContainer checked={checked} pseudoElementsContent={pseudoElementsContent}>
       <CheckboxHidden id='checkbox' checked={checked} onChange={onChange}/>
       <ToggleSwitchLabel htmlFor='checkbox'/>
     </ToggleSwitchContainer>
   )
 }
 
+ToggleSwitch.defaultProps = {
+  pseudoElementsContent: {
+    before: '',
+    after: ''
+  }
+}
 
 export default ToggleSwitch;

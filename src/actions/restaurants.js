@@ -1,3 +1,6 @@
-import { useCallback } from 'react';
+export const SEARCH_TYPES = {
+  RESTAURANT: 'RESTAURANT',
+  OTHERS: 'OTHERS'
+}
 
-const CHANGE_SEARCH_INPUT = 'CHANGE_SEARCH_INPUT';
+export const CHANGE_SEARCH_TYPE = 'CHANGE_SEARCH_TYPE'
