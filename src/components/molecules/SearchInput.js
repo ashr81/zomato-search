@@ -53,7 +53,7 @@ const SearchInput = ({
     options, inputPrefix, value, CustomListElement, ...props
 }) => {
   return (
-    <FlexContainer m={4} {...props}>
+    <FlexContainer {...props}>
       <FlexInputContainer mt={6} width='100%'>
         <InputPrefix px={2} mt={3} fontWeight='bold' fontSize={1} title={inputPrefix}>{inputPrefix}</InputPrefix>
         <Input px={0} pl={11} width='100%' onChange={onTextChange} value={value}/>

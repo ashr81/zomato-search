@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, memo } from 'react';
 import { Flex, Text } from '../atoms';
 import { ToggleSwitch, SearchInput, RadioOptions } from '../molecules';
 import { SEARCH_TYPES, SORTBY_OPTIONS, ORDERBY_OPTIONS } from '../../actions/restaurants';
@@ -23,6 +23,7 @@ const Home = ({
     <Fragment>
       <Flex flexDirection={['column', 'row']} width={['100%', '500px', '800px']}>
         <SearchInput
+          mr={4}
           selectedValue={selectedLocation}
           value={citySearchValue}
           onTextChange={onCitySearchTextChange}
@@ -31,6 +32,7 @@ const Home = ({
         />
         <Flex flexDirection='column' flexGrow={2}>
           <SearchInput
+            ml={4}
             inputPrefix={searchTypePrefixText}
             selectedValue={isSearchTypeRestaurant ? selectedPrimarySearchValue : selectedOtherSearchValues}
             onTextChange={onPrimarySearchTextChange}
@@ -39,7 +41,7 @@ const Home = ({
             onSelectOption={isSearchTypeRestaurant ? onPrimarySearchSelect : onOthersSearchSelect}
             CustomListElement={isSearchTypeRestaurant ? RestaurantListElement : null}
           />
-          <Flex ml={4} alignItems='flex-end'>
+          <Flex ml={4} mt={4} alignItems='flex-end'>
             <ToggleSwitch uniqueId='checkbox-search-type' checked={!isSearchTypeRestaurant} onChange={onSearchTypeChange}/>
             <Text ml={2} fontSize={1} fontWeight='bold'>{`Change search to ${isSearchTypeRestaurant ? 'cuisines, category and locality' : 'restaurants'}`}</Text>
           </Flex>
@@ -57,11 +59,11 @@ const Home = ({
           <RadioOptions options={SORTBY_OPTIONS} onChange={onSortByChange} selectedOption={sortBy} name='Sort By:'/>
         </Flex>
         <Flex flexDirection='column'>
-          {isSearchTypeRestaurant ? null : restaurants.map(restaurant => <RestaurantGridView {...restaurant}/>)}
+          {isSearchTypeRestaurant ? null : restaurants.map(restaurant => <RestaurantGridView key={restaurant.id} {...restaurant}/>)}
         </Flex>
       </Flex>
     </Fragment>
   )
 }
 
-export default Home;
+export default memo(Home);
