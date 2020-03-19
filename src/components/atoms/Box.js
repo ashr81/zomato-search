@@ -5,7 +5,7 @@
  */
 import styled, { css } from 'styled-components';
 import { 
-  background, color, border, layout, position, space, typography, fontSize, fontStyle,
+  background, color, border, layout, position, space, typography, fontStyle, colorStyle
 } from 'styled-system';
 
 const Box = styled.div`
@@ -17,6 +17,7 @@ const Box = styled.div`
   ${position}
   ${typography}
   ${fontStyle}
+  ${colorStyle}
   ${({ cursor }) => cursor && css`
     cursor: ${cursor};
   `}

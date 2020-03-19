@@ -3,14 +3,19 @@ import { Flex } from '../atoms';
 import { ToggleSwitch, SearchInput } from '../molecules';
 import { SEARCH_TYPES } from '../../actions/restaurants';
 import LocationModal from '../organisms/LocationModal';
+import RestaurantListElement from '../organisms/RestaurantListElement';
+import RestaurantModal from '../organisms/RestaurantModal';
 
 const Home = ({
   searchType, onSearchTypeChange, selectedLocation,
   onCitySearchTextChange, onPrimarySearchTextChange,
   selectedPrimarySearchValue, citySearchValue,
-  primarySearchValue, citiesSearchCollection, onCitySelection
+  primarySearchValue, citiesSearchCollection, onCitySelection,
+  restaurants, onPrimarySearchSelect, selectedRestaurant,
+  onCloseRestaurantModal
 }) => {
-  const searchTypePrefixText = searchType === SEARCH_TYPES.RESTAURANT ? 'Restaurants' : 'Cuisines, Category, Locality'
+  const isSearchTypeRestaurant = searchType === SEARCH_TYPES.RESTAURANT
+  const searchTypePrefixText = isSearchTypeRestaurant ? 'Restaurants' : 'Cuisines, Category, Locality'
   if(!selectedLocation.name) return (<LocationModal />)
   return (
     <Flex flexDirection={['column', 'row']} width={['100%', '500px', '800px']}>
@@ -28,9 +33,13 @@ const Home = ({
           selectedValue={selectedPrimarySearchValue}
           onTextChange={onPrimarySearchTextChange}
           value={primarySearchValue}
+          options={restaurants}
+          onSelectOption={onPrimarySearchSelect}
+          CustomListElement={isSearchTypeRestaurant ? RestaurantListElement : null}
         />
         <ToggleSwitch checked={searchType !== SEARCH_TYPES.RESTAURANT} onChange={onSearchTypeChange}/>
       </Flex>
+      <RestaurantModal open={!!selectedRestaurant.id} onClose={onCloseRestaurantModal} restaurant={selectedRestaurant}/>
     </Flex>
   )
 }

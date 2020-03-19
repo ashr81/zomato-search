@@ -10,6 +10,7 @@ const ModalOverlay = styled(Flex)`
   top: 0px;
   left: 0px;
   opacity: 0.6;
+  z-index: 10;
   background-color: ${({ theme: { colors }}) => colors.modalOverlayBg};
 `
 
@@ -19,6 +20,7 @@ const ModalContainer = styled(Flex)`
   top: 50%;
   left: 50%;
   flex-direction: column;
+  z-index: 11;
   background-color: ${({ theme: { colors }}) => colors.modalBg};
 `
 const Modal = ({
@@ -30,9 +32,9 @@ const Modal = ({
       <ModalOverlay/>
       <ModalContainer width={['100%', '500px', '800px']}>
         {children}
-        <Flex as='footer' justifyContent='flex-end'>
-          <Button variant='danger' p={4} m={3}>Close</Button>
-        </Flex>
+        {typeof(onClose) === 'function' ? <Flex as='footer' justifyContent='flex-end'>
+          <Button variant='danger' p={4} m={3} cursor='pointer' onClick={onClose}>Close</Button>
+        </Flex> : null}
       </ModalContainer>
     </Fragment> : null}
   </Portals>)
