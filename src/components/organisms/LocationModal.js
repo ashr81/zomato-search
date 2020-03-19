@@ -59,6 +59,9 @@ const LocationModal = () => {
     <Modal open={!selectedLocation.id}>
       <Flex>
         <SearchInput
+          width='100%'
+          mb={4}
+          px={4}
           selectedValue={selectedLocation}
           onTextChange={onTextChange}
           value={locationInput}

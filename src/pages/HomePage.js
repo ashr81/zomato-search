@@ -3,12 +3,12 @@ import Home from '../components/templates/Home';
 import reducer, { initialState } from '../reducers/restaurants';
 import {
   CHANGE_SEARCH_TYPE, CHANGE_CITY_SEARCH_TEXT, CHANGE_PRIMARY_SEARCH_TEXT,
-  CHANGE_CITY_SEARCH_OPTIONS, SELECT_CITY, ADD_RESTAURANTS, SEARCH_TYPES,
-  SELECT_RESTAURANT, CLOSE_RESTAURANT_MODAL, ADD_OTHER_SEARCH_OPTIONS, SELECT_OTHER_SEARCH,
-  ENTITY_CUISINES, ENTITY_CATEGORIES, SELECT_SORT_ORDER, SELECT_SORTBY_OPTION, CHANGE_SORTBY_OPTION, CHANGE_SORT_ORDER
+  CHANGE_CITY_SEARCH_OPTIONS, SELECT_CITY, ADD_RESTAURANTS, SELECT_RESTAURANT,
+  CLOSE_RESTAURANT_MODAL, ADD_OTHER_SEARCH_OPTIONS, SELECT_OTHER_SEARCH,
+  ENTITY_CUISINES, ENTITY_CATEGORIES, CHANGE_SORTBY_OPTION, CHANGE_SORT_ORDER
 } from '../actions/restaurants';
 import { useLocationDetails, useDebouceThrottleFetchAPI, useFetchAPI } from '../custom-hooks';
-import { API_CITIES, API_SEARCH, API_CATEGORIES, API_CUISINES, API_LOCATION_DETAILS } from '../routes/api';
+import { API_CITIES, API_SEARCH, API_CATEGORIES, API_CUISINES } from '../routes/api';
 
 const HomePage = () => {
   const { selectedLocation, updateSelectedLocation } = useLocationDetails()
@@ -98,7 +98,7 @@ const HomePage = () => {
    
   // No API call required when search_type is others.
   useDebouceThrottleFetchAPI(
-    state.loadRestaurantData ? (state.primarySearchValue || state.selectedOtherSearchValues.length) : false,
+    state.restaurantsLoading ? state.primarySearchValue || state.selectedOtherSearchValues.length : false,
     {
       url: API_SEARCH,
       params: {

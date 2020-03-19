@@ -9,7 +9,7 @@ const RestuarantGridView = ({
   all_reviews_count: reviewsCount
 }) => {
   return (
-      <Flex backgroundColor='listCellBg' m={4}>
+      <Flex backgroundColor='listCellBg' my={4}>
         <Image m={4} src={thumb} size={'100%', 6}/>
         <Flex flexGrow={1}>
           <Flex mt={4}>

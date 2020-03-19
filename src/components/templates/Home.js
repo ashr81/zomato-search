@@ -6,6 +6,7 @@ import LocationModal from '../organisms/LocationModal';
 import RestaurantListElement from '../organisms/RestaurantListElement';
 import RestaurantModal from '../organisms/RestaurantModal';
 import RestaurantGridView from '../organisms/RestaurantGridView';
+import RestaurantsLoader from '../../content-loaders/RestaurantsLoader';
 
 const Home = ({
   searchType, onSearchTypeChange, selectedLocation,
@@ -15,7 +16,8 @@ const Home = ({
   restaurants, onPrimarySearchSelect, selectedRestaurant,
   onCloseRestaurantModal, otherSearchOptions,
   onOthersSearchSelect, selectedOtherSearchValues,
-  sortBy, sortOrder, onSortByChange, onSortOrderChange
+  sortBy, sortOrder, onSortByChange, onSortOrderChange,
+  restaurantsLoading
 }) => {
   const isSearchTypeRestaurant = searchType === SEARCH_TYPES.RESTAURANT
   const searchTypePrefixText = isSearchTypeRestaurant ? 'Restaurants' : 'Cuisines, Category, Locality'
@@ -59,7 +61,8 @@ const Home = ({
           <RadioOptions options={SORTBY_OPTIONS} onChange={onSortByChange} selectedOption={sortBy} name='Sort By:'/>
         </Flex>
         <Flex flexDirection='column'>
-          {isSearchTypeRestaurant ? null : restaurants.map(restaurant => <RestaurantGridView key={restaurant.id} {...restaurant}/>)}
+          {isSearchTypeRestaurant ? null :
+            (restaurantsLoading ? <RestaurantsLoader /> : restaurants.map(restaurant => <RestaurantGridView key={restaurant.id} {...restaurant}/>))}
         </Flex>
       </Flex>
     </Fragment>

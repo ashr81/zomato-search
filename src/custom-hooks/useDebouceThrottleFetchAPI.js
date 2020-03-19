@@ -24,7 +24,7 @@ const useDebouceThrottleFetchAPI = (
           }
         })();
       }
-    }, 1000)
+    }, 700)
   }, [value, timeoutIdRef])
   return { value }
 }

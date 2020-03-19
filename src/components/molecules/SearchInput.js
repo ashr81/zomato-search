@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useRef, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { Flex, Input, Text } from '../atoms';
 
@@ -31,6 +31,7 @@ const UnorderedList = styled(Flex).attrs(() => ({ as: 'ul', my: 0, px: 0, maxHei
   position: absolute;
   top: 60px;
   z-index: 4;
+  display: ${({ open }) => open ? 'flex' : 'none'};
   background-color: ${({ theme: { colors }}) => colors.inputPrefixBg};
 `
 
@@ -52,20 +53,36 @@ const SearchInput = ({
     selectedValue, onTextChange, onSelectOption,
     options, inputPrefix, value, CustomListElement, ...props
 }) => {
+  const [dropdownOpen, updateDropdownOpen] = useState(false)
+  const containerRef = useRef(null)
+
+  useEffect(() => {
+    const closeDropdown = (event) => {
+      const { left, top, width, height } = containerRef.current.getBoundingClientRect()
+      if(
+        event.clientX < left || event.clientX > (left + width) ||
+        event.clientY < top || event.clientY > (top + height)
+      ) {
+        updateDropdownOpen(false);
+      }
+    }
+    window.addEventListener('click', closeDropdown)
+    return () => window.removeEventListener('click', closeDropdown)
+  }, [containerRef, updateDropdownOpen])
   return (
-    <FlexContainer {...props}>
+    <FlexContainer ref={containerRef} {...props} onClick={() => updateDropdownOpen(true)}>
       <FlexInputContainer mt={6} width='100%'>
         <InputPrefix px={2} mt={3} fontWeight='bold' fontSize={1} title={inputPrefix}>{inputPrefix}</InputPrefix>
         <Input px={0} pl={11} width='100%' onChange={onTextChange} value={value}/>
       </FlexInputContainer>
-      <UnorderedList>
+      <UnorderedList open={dropdownOpen}>
         {
           CustomListElement ? options.map((elem) => <CustomListElement key={elem.id} onSelectOption={onSelectOption} {...elem}/>) :
           (Array.isArray(options) ? options.map(elem => (
             <ListElement pl={11} py={3} pr={3} key={elem.id} data-id={elem.id} onClick={onSelectOption}>{elem.name}</ListElement>
           )) : Object.keys(options).map((optionType, index) => {
             return <Fragment key={index}>
-              <Text pl={10} py={3} textTransform='capitalize' fontWeight='bold' fontSize={3}>{optionType}</Text>
+              <Text backgroundColor='layoutBg' pl={10} py={3} textTransform='capitalize' fontWeight='bold' fontSize={3}>{optionType}</Text>
               {options[optionType].map(elem => {
                 const selected = selectedValue.some(value => value.id === elem.id && value.type === optionType)
                 return <ListElement pl={11} py={3} pr={3} key={elem.id} selected={selected} data-type={optionType} data-id={elem.id} onClick={onSelectOption}>{elem.name}</ListElement>
