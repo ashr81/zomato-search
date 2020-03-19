@@ -4,10 +4,10 @@ import reducer, { initialState } from '../reducers/restaurants';
 import {
   CHANGE_SEARCH_TYPE, CHANGE_CITY_SEARCH_TEXT, CHANGE_PRIMARY_SEARCH_TEXT,
   CHANGE_CITY_SEARCH_OPTIONS, SELECT_CITY, ADD_RESTAURANTS, SEARCH_TYPES,
-  SELECT_RESTAURANT, CLOSE_RESTAURANT_MODAL
+  SELECT_RESTAURANT, CLOSE_RESTAURANT_MODAL, ADD_OTHER_SEARCH_OPTIONS, SELECT_OTHER_SEARCH, ENTITY_CUISINES, ENTITY_CATEGORIES
 } from '../actions/restaurants';
-import { useLocationDetails, useDebouceThrottleFetchAPI } from '../custom-hooks';
-import { API_CITIES, API_SEARCH } from '../routes/api';
+import { useLocationDetails, useDebouceThrottleFetchAPI, useFetchAPI } from '../custom-hooks';
+import { API_CITIES, API_SEARCH, API_CATEGORIES, API_CUISINES, API_LOCATION_DETAILS } from '../routes/api';
 
 const HomePage = () => {
   const { selectedLocation, updateSelectedLocation } = useLocationDetails()
@@ -70,19 +70,50 @@ const HomePage = () => {
     })
   }
 
+  const onOthersSearchSelect = (event) => {
+    dispatch({
+      type: SELECT_OTHER_SEARCH,
+      entityId: event.currentTarget.dataset.id,
+      entityType: event.currentTarget.dataset.type
+    })
+  }
+
   const onCloseRestaurantModal = () => {
     dispatch({
       type: CLOSE_RESTAURANT_MODAL
     })
   }
+
+  const onOthersSearchTextChange = (event) => {
+    
+  }
+
+  // useFetchAPI(
+  //   selectedLocation.id,
+  //   [
+  //     {url: API_CATEGORIES},
+  //     {url: API_CUISINES, params: { city_id: selectedLocation.id }}
+  //   ],
+  //   (response) => {
+  //     dispatch({
+  //       type: ADD_OTHER_SEARCH_OPTIONS,
+  //       categories: response[0],
+  //       cuisines: response[1]
+  //     })
+  //   }
+  // )
    
   // No API call required when search_type is others.
   useDebouceThrottleFetchAPI(
-    state.loadRestaurantData ? state.primarySearchValue : false,
+    state.loadRestaurantData ? (state.primarySearchValue || state.selectedOtherSearchValues.length) : false,
     {
       url: API_SEARCH,
       params: {
-        q: state.primarySearchValue
+        q: state.primarySearchValue,
+        entity_id: selectedLocation.id,
+        entity_type: 'city',
+        cuisines: state.selectedOtherSearchValues.filter(value => value.type === ENTITY_CUISINES).map(value => value.id).join(','),
+        category: state.selectedOtherSearchValues.filter(value => value.type === ENTITY_CATEGORIES).map(value => value.id).join(',')
       }
     },
     (response) => {
@@ -105,6 +136,7 @@ const HomePage = () => {
       onCitySelection={onCitySelection}
       onPrimarySearchSelect={onPrimarySearchSelect}
       onCloseRestaurantModal={onCloseRestaurantModal}
+      onOthersSearchSelect={onOthersSearchSelect}
     />
   )
 }

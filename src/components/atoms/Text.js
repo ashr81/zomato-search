@@ -9,6 +9,9 @@ import { Flex } from '.';
 const Text = styled(Flex)`
   ${typography}
   ${fontSize}
+  ${({ textTransform }) => textTransform && css`
+    text-transform: ${textTransform}
+  `}
   ${({ cursor }) => cursor && css`
     cursor: ${cursor}
   `}

@@ -12,14 +12,25 @@ const useFetchAPI = (
 )  => {
   useEffect(() => {
     if(isLoading) {
-      (async function() {
-        try {
-          const response = await request(options)
-          onSuccess(response)
-        } catch(err) {
-          window.alert(err.message);
-        }
-      })();
+      // when options is an array. multiple api calls are required.
+      if(Array.isArray(options)) {
+        Promise
+          .all(options.map(option => request(option)))
+          .then(onSuccess)
+          .catch((err) => {
+            window.alert(err.message)
+          })
+      } else {
+        // when options are object. only single API call is enough.
+        (async function() {
+          try {
+            const response = await request(options)
+            onSuccess(response)
+          } catch(err) {
+            window.alert(err.message);
+          }
+        })();
+      }
     }
   }, [isLoading])
   return { isLoading }

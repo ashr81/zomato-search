@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { Fragment } from 'react';
+import styled, { css } from 'styled-components';
 import { Flex, Input, Text } from '../atoms';
 
 const FlexContainer = styled(Flex)`
@@ -14,6 +14,11 @@ const FlexInputContainer = styled(Flex)`
 
 const InputPrefix = styled(Text)`
   position: absolute;
+  display: inline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 80px;
   left: 8px;
   z-index: 1;
   background-color: ${({ theme: { colors }}) => colors.inputPrefixBg};
@@ -31,10 +36,15 @@ const UnorderedList = styled(Flex).attrs(() => ({ as: 'ul', my: 0, px: 0, maxHei
 
 const ListElement = styled(Flex).attrs(() => ({ as: 'li' }))`
   cursor: pointer;
-  &:hover {
+  ${({ selected }) => selected && css`
     width: 100%;
     background-color: ${({ theme: { colors }}) => colors.primaryBtnBg};
     color: ${({ theme: { colors }}) => colors.primaryBtnColor};
+  `}
+  &:hover {
+    width: 100%;
+    background-color: ${({ theme: { colors }, selected }) => selected ? colors.border : colors.primaryBtnBg};
+    color: ${({ theme: { colors }, selected }) => selected ? colors.textColor : colors.primaryBtnColor};
   }
 `
 
@@ -45,13 +55,23 @@ const SearchInput = ({
   return (
     <FlexContainer m={4} {...props}>
       <FlexInputContainer mt={6} width='100%'>
-        <InputPrefix px={2} mr={6} mt={3} fontWeight='bold' fontSize={1}>{inputPrefix}</InputPrefix>
+        <InputPrefix px={2} mt={3} fontWeight='bold' fontSize={1} title={inputPrefix}>{inputPrefix}</InputPrefix>
         <Input px={0} pl={11} width='100%' onChange={onTextChange} value={value}/>
       </FlexInputContainer>
       <UnorderedList>
-        {CustomListElement ? options.map((elem) => <CustomListElement key={elem.id} onSelectOption={onSelectOption} {...elem}/>) : options.map(elem => (
-          <ListElement pl={11} py={3} pr={3} key={elem.id} data-id={elem.id} onClick={onSelectOption}>{elem.name}</ListElement>
-        ))}
+        {
+          CustomListElement ? options.map((elem) => <CustomListElement key={elem.id} onSelectOption={onSelectOption} {...elem}/>) :
+          (Array.isArray(options) ? options.map(elem => (
+            <ListElement pl={11} py={3} pr={3} key={elem.id} data-id={elem.id} onClick={onSelectOption}>{elem.name}</ListElement>
+          )) : Object.keys(options).map((optionType, index) => {
+            return <Fragment key={index}>
+              <Text pl={10} py={3} textTransform='capitalize' fontWeight='bold' fontSize={3}>{optionType}</Text>
+              {options[optionType].map(elem => {
+                const selected = selectedValue.some(value => value.id === elem.id && value.type === optionType)
+                return <ListElement pl={11} py={3} pr={3} key={elem.id} selected={selected} data-type={optionType} data-id={elem.id} onClick={onSelectOption}>{elem.name}</ListElement>
+            })}</Fragment>
+          }))
+        }
       </UnorderedList>
     </FlexContainer>
   )

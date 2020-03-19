@@ -73,12 +73,13 @@ const CheckboxHidden = styled.input.attrs(() => ({ type: 'checkbox' }))`
 `
 
 const ToggleSwitch = ({
-  checked, onChange, pseudoElementsContent
+  checked, onChange,
+  pseudoElementsContent, uniqueId
 }) => {
   return (
     <ToggleSwitchContainer checked={checked} pseudoElementsContent={pseudoElementsContent}>
-      <CheckboxHidden id='checkbox' checked={checked} onChange={onChange}/>
-      <ToggleSwitchLabel htmlFor='checkbox'/>
+      <CheckboxHidden id={uniqueId} checked={checked} onChange={onChange}/>
+      <ToggleSwitchLabel htmlFor={uniqueId}/>
     </ToggleSwitchContainer>
   )
 }
@@ -87,7 +88,8 @@ ToggleSwitch.defaultProps = {
   pseudoElementsContent: {
     before: '',
     after: ''
-  }
+  },
+  uniqueId: 'checkbox'
 }
 
 export default ToggleSwitch;

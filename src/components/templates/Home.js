@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
-import { Flex } from '../atoms';
+import React from 'react';
+import { Flex, Text } from '../atoms';
 import { ToggleSwitch, SearchInput } from '../molecules';
 import { SEARCH_TYPES } from '../../actions/restaurants';
 import LocationModal from '../organisms/LocationModal';
@@ -12,15 +12,14 @@ const Home = ({
   selectedPrimarySearchValue, citySearchValue,
   primarySearchValue, citiesSearchCollection, onCitySelection,
   restaurants, onPrimarySearchSelect, selectedRestaurant,
-  onCloseRestaurantModal
+  onCloseRestaurantModal, otherSearchOptions,
+  onOthersSearchSelect, selectedOtherSearchValues
 }) => {
   const isSearchTypeRestaurant = searchType === SEARCH_TYPES.RESTAURANT
   const searchTypePrefixText = isSearchTypeRestaurant ? 'Restaurants' : 'Cuisines, Category, Locality'
-  if(!selectedLocation.name) return (<LocationModal />)
   return (
     <Flex flexDirection={['column', 'row']} width={['100%', '500px', '800px']}>
       <SearchInput
-        flexGrow={1}
         selectedValue={selectedLocation}
         value={citySearchValue}
         onTextChange={onCitySearchTextChange}
@@ -30,15 +29,19 @@ const Home = ({
       <Flex flexDirection='column' flexGrow={2}>
         <SearchInput
           inputPrefix={searchTypePrefixText}
-          selectedValue={selectedPrimarySearchValue}
+          selectedValue={isSearchTypeRestaurant ? selectedPrimarySearchValue : selectedOtherSearchValues}
           onTextChange={onPrimarySearchTextChange}
           value={primarySearchValue}
-          options={restaurants}
-          onSelectOption={onPrimarySearchSelect}
+          options={isSearchTypeRestaurant ? restaurants : otherSearchOptions}
+          onSelectOption={isSearchTypeRestaurant ? onPrimarySearchSelect : onOthersSearchSelect}
           CustomListElement={isSearchTypeRestaurant ? RestaurantListElement : null}
         />
-        <ToggleSwitch checked={searchType !== SEARCH_TYPES.RESTAURANT} onChange={onSearchTypeChange}/>
+        <Flex ml={4} alignItems='flex-end'>
+          <ToggleSwitch uniqueId='checkbox-search-type' checked={!isSearchTypeRestaurant} onChange={onSearchTypeChange}/>
+          <Text ml={2} fontSize={1} fontWeight='bold'>{`Change search to ${isSearchTypeRestaurant ? 'cuisines, category and locality' : 'restaurants'}`}</Text>
+        </Flex>
       </Flex>
+      {!selectedLocation.id ? <LocationModal open={true} /> : null}
       <RestaurantModal open={!!selectedRestaurant.id} onClose={onCloseRestaurantModal} restaurant={selectedRestaurant}/>
     </Flex>
   )
