@@ -3,12 +3,13 @@
  * and dynamically swaping the element type to p, h1-h6.
  */
 import styled, { css } from 'styled-components';
-import { typography, fontSize } from 'styled-system';
+import { typography, fontSize, textStyle } from 'styled-system';
 import { Flex } from '.';
 
 const Text = styled(Flex)`
   ${typography}
   ${fontSize}
+  ${textStyle}
   ${({ textTransform }) => textTransform && css`
     text-transform: ${textTransform}
   `}

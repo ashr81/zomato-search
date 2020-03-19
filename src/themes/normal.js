@@ -28,6 +28,21 @@ export const colors = {
     space: [0, 2, 4, 8, 12, 16, 24, 30, 26, 48, 64, 96, 128],
     sizes: [0, 4, 8, 20, 40, 100, 200, 300, 500],
     fontSizes: [10, 12, 14, 16, 18, 24, 30, 36, 72],
+    textStyles: {
+      secondary: {
+        color: colors.textColor,
+        cursor: 'pointer',
+        textTransform: 'capitalize',
+        "&:hover": {
+          color: colors.success,
+          fontWeight: 'bold'
+        },
+        "&[data-selected=true]": {
+          color: colors.success,
+          fontWeight: 'bold'
+        }
+      }
+    },
     buttons: {
       primary: {
         backgroundColor: colors.primaryBtnBg,

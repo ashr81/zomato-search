@@ -4,7 +4,8 @@ import reducer, { initialState } from '../reducers/restaurants';
 import {
   CHANGE_SEARCH_TYPE, CHANGE_CITY_SEARCH_TEXT, CHANGE_PRIMARY_SEARCH_TEXT,
   CHANGE_CITY_SEARCH_OPTIONS, SELECT_CITY, ADD_RESTAURANTS, SEARCH_TYPES,
-  SELECT_RESTAURANT, CLOSE_RESTAURANT_MODAL, ADD_OTHER_SEARCH_OPTIONS, SELECT_OTHER_SEARCH, ENTITY_CUISINES, ENTITY_CATEGORIES
+  SELECT_RESTAURANT, CLOSE_RESTAURANT_MODAL, ADD_OTHER_SEARCH_OPTIONS, SELECT_OTHER_SEARCH,
+  ENTITY_CUISINES, ENTITY_CATEGORIES, SELECT_SORT_ORDER, SELECT_SORTBY_OPTION, CHANGE_SORTBY_OPTION, CHANGE_SORT_ORDER
 } from '../actions/restaurants';
 import { useLocationDetails, useDebouceThrottleFetchAPI, useFetchAPI } from '../custom-hooks';
 import { API_CITIES, API_SEARCH, API_CATEGORIES, API_CUISINES, API_LOCATION_DETAILS } from '../routes/api';
@@ -84,8 +85,18 @@ const HomePage = () => {
     })
   }
 
-  const onOthersSearchTextChange = (event) => {
-    
+  const onSortOrderChange = (event) => {
+    dispatch({
+      type: CHANGE_SORT_ORDER,
+      sortOrder: event.currentTarget.textContent
+    })
+  }
+
+  const onSortByChange = (event) => {
+    dispatch({
+      type: CHANGE_SORTBY_OPTION,
+      sortBy: event.currentTarget.textContent
+    })
   }
 
   // useFetchAPI(
@@ -104,27 +115,29 @@ const HomePage = () => {
   // )
    
   // No API call required when search_type is others.
-  useDebouceThrottleFetchAPI(
-    state.loadRestaurantData ? (state.primarySearchValue || state.selectedOtherSearchValues.length) : false,
-    {
-      url: API_SEARCH,
-      params: {
-        q: state.primarySearchValue,
-        entity_id: selectedLocation.id,
-        entity_type: 'city',
-        cuisines: state.selectedOtherSearchValues.filter(value => value.type === ENTITY_CUISINES).map(value => value.id).join(','),
-        category: state.selectedOtherSearchValues.filter(value => value.type === ENTITY_CATEGORIES).map(value => value.id).join(',')
-      }
-    },
-    (response) => {
-      if(response.config.params.q === state.primarySearchValue) {
-        dispatch({
-          type: ADD_RESTAURANTS,
-          data: response.data
-        })
-      }
-    }
-  )
+  // useDebouceThrottleFetchAPI(
+  //   state.loadRestaurantData ? (state.primarySearchValue || state.selectedOtherSearchValues.length) : false,
+  //   {
+  //     url: API_SEARCH,
+  //     params: {
+  //       q: state.primarySearchValue,
+  //       entity_id: selectedLocation.id,
+  //       entity_type: 'city',
+  //       cuisines: state.selectedOtherSearchValues.filter(value => value.type === ENTITY_CUISINES).map(value => value.id).join(','),
+  //       category: state.selectedOtherSearchValues.filter(value => value.type === ENTITY_CATEGORIES).map(value => value.id).join(','),
+  //       sort: state.sortBy,
+  //       order: state.sortOrder
+  //     }
+  //   },
+  //   (response) => {
+  //     if(response.config.params.q === state.primarySearchValue) {
+  //       dispatch({
+  //         type: ADD_RESTAURANTS,
+  //         data: response.data
+  //       })
+  //     }
+  //   }
+  // )
 
   return (
     <Home
@@ -137,6 +150,8 @@ const HomePage = () => {
       onPrimarySearchSelect={onPrimarySearchSelect}
       onCloseRestaurantModal={onCloseRestaurantModal}
       onOthersSearchSelect={onOthersSearchSelect}
+      onSortOrderChange={onSortOrderChange}
+      onSortByChange={onSortByChange}
     />
   )
 }
