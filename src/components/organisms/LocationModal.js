@@ -8,6 +8,7 @@ const LocationModal = () => {
   const { selectedLocation, updateSelectedLocation } = useLocationDetails();
   const [locationCoordinates, updateLocationCoordinates] = useState(selectedLocation)
   const [locationInput, updateLocationInput] = useState('')
+  const [loadingOptions, updateLoadingOptions] = useState(false)
   const [options, updateOptions] = useState([])
   
   useFetchAPI(!!locationCoordinates.latitude, {
@@ -31,6 +32,10 @@ const LocationModal = () => {
     }
   }, [selectedLocation.id, updateLocationCoordinates])
 
+  useEffect(() => {
+    if(locationInput) updateLoadingOptions(true);
+  }, [locationInput])
+
   const onTextChange = useCallback((event) => {
     updateLocationInput(event.currentTarget.value)
   }, [updateLocationInput])
@@ -46,7 +51,11 @@ const LocationModal = () => {
     (response) => {
       if(response.config.params.q === locationInput) {
         updateOptions(response.data.location_suggestions)
+        updateLoadingOptions(false)
       }
+    },
+    () => {
+      updateLoadingOptions(false)
     }
   )
 
@@ -62,6 +71,7 @@ const LocationModal = () => {
           width='100%'
           mb={4}
           px={4}
+          isLoading={loadingOptions}
           selectedValue={selectedLocation}
           onTextChange={onTextChange}
           value={locationInput}
