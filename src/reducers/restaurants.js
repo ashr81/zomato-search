@@ -114,6 +114,7 @@ const reducer = (state, action) => {
     case CHANGE_CITY_SEARCH_OPTIONS: {
       return {
         ...state,
+        citySearchLoading: false,
         citiesSearchCollection: payload.options,
       }
     }

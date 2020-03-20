@@ -44,7 +44,7 @@ const HomePage = () => {
       type: SELECT_CITY,
       cityId
     })
-  }, [dispatch, updateSelectedLocation])
+  }, [dispatch, updateSelectedLocation, state.citiesSearchCollection])
 
   const onPrimarySearchSelect = useCallback((event) => {
     dispatch({

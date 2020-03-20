@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useRef, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { Flex, Input, Text } from '../atoms';
+import SearchListLoader from '../../content-loaders/SearchListLoader';
 
 const FlexContainer = styled(Flex)`
   flex-direction: column;
@@ -50,8 +51,8 @@ const ListElement = styled(Flex).attrs(() => ({ as: 'li' }))`
 `
 
 const SearchInput = ({
-    selectedValue, onTextChange, onSelectOption,
-    options, inputPrefix, value, CustomListElement, ...props
+  selectedValue, onTextChange, onSelectOption, isLoading,
+  options, inputPrefix, value, CustomListElement, ...props
 }) => {
   const [dropdownOpen, updateDropdownOpen] = useState(false)
   const containerRef = useRef(null)
@@ -76,8 +77,9 @@ const SearchInput = ({
         <Input px={0} pl={11} width='100%' onChange={onTextChange} value={value}/>
       </FlexInputContainer>
       <UnorderedList open={dropdownOpen}>
-        {
-          CustomListElement ? options.map((elem) => <CustomListElement key={elem.id} onSelectOption={onSelectOption} {...elem}/>) :
+        {isLoading ? 
+          <Flex flexDirection='column'>{[1, 2, 3].map((i) => <SearchListLoader key={i}/>)}</Flex> :
+          (CustomListElement ? options.map((elem) => <CustomListElement key={elem.id} onSelectOption={onSelectOption} {...elem}/>) :
           (Array.isArray(options) ? options.map(elem => (
             <ListElement pl={11} py={3} pr={3} key={elem.id} data-id={elem.id} onClick={onSelectOption}>{elem.name}</ListElement>
           )) : Object.keys(options).map((optionType, index) => {
@@ -87,7 +89,7 @@ const SearchInput = ({
                 const selected = selectedValue.some(value => value.id === elem.id && value.type === optionType)
                 return <ListElement pl={11} py={3} pr={3} key={elem.id} selected={selected} data-type={optionType} data-id={elem.id} onClick={onSelectOption}>{elem.name}</ListElement>
             })}</Fragment>
-          }))
+          })))
         }
       </UnorderedList>
     </FlexContainer>

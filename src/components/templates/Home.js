@@ -17,7 +17,7 @@ const Home = ({
   onCloseRestaurantModal, otherSearchOptions,
   onOthersSearchSelect, selectedOtherSearchValues,
   sortBy, sortOrder, onSortByChange, onSortOrderChange,
-  restaurantsLoading
+  restaurantsLoading, citySearchLoading
 }) => {
   const isSearchTypeRestaurant = searchType === SEARCH_TYPES.RESTAURANT
   const searchTypePrefixText = isSearchTypeRestaurant ? 'Restaurants' : 'Cuisines, Category, Locality'
@@ -31,10 +31,12 @@ const Home = ({
           onTextChange={onCitySearchTextChange}
           options={citiesSearchCollection}
           onSelectOption={onCitySelection}
+          isLoading={citySearchLoading}
         />
         <Flex flexDirection='column' flexGrow={2}>
           <SearchInput
             ml={4}
+            isLoading={isSearchTypeRestaurant && restaurantsLoading}
             inputPrefix={searchTypePrefixText}
             selectedValue={isSearchTypeRestaurant ? selectedPrimarySearchValue : selectedOtherSearchValues}
             onTextChange={onPrimarySearchTextChange}
