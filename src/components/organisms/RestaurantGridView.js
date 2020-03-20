@@ -13,7 +13,7 @@ const RestuarantGridView = ({
         <Image m={2} src={thumb} size={'100%', 6}/>
         <Flex flexGrow={1}>
             <Flex flexDirection='column' px={4} mt={1, 4}>
-              <Text as='h3' fontWeight='bold' fontSize={6} color='danger' py={0} my={0}>{name}</Text>
+              <Text as='h3' fontWeight='bold' fontSize={[3, 6]} color='danger' py={0} my={0}>{name}</Text>
               <Text fontSize={2}>{location.locality_verbose}</Text>
               <Flex alignItems='center'>
                 <Text mr={2}>Open between: </Text>
