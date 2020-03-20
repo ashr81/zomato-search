@@ -4,7 +4,7 @@ import { Flex } from '../components/atoms'
 
 const RestaurantsLoader = () => {
   return (
-    <Flex width='100%' height='400px'>
+    <Flex width='100%' height='200px'>
       <ContentLoader
         speed={2}
       >

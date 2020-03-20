@@ -1,4 +1,4 @@
-import React, { useReducer, useCallback } from 'react';
+import React, { useReducer, useCallback, useEffect } from 'react';
 import Home from '../components/templates/Home';
 import reducer, { initialState } from '../reducers/restaurants';
 import {
@@ -40,11 +40,16 @@ const HomePage = () => {
   const onCitySelection = useCallback((event) => {
     const cityId = parseInt(event.currentTarget.dataset.id)
     updateSelectedLocation(state.citiesSearchCollection.filter(city => city.id === cityId)[0])
-    dispatch({
-      type: SELECT_CITY,
-      cityId
-    })
   }, [dispatch, updateSelectedLocation, state.citiesSearchCollection])
+
+  useEffect(() => {
+    if(selectedLocation.id) {
+      dispatch({
+        type: SELECT_CITY,
+        selectedCity: selectedLocation
+      })
+    }
+  }, [dispatch, selectedLocation])
 
   const onPrimarySearchSelect = useCallback((event) => {
     dispatch({

@@ -763,7 +763,7 @@ const reducer = (state, action) => {
     case SELECT_CITY: {
       return {
         ...state,
-        citySearchValue: state.citiesSearchCollection.filter(city => city.id === payload.cityId)[0].name,
+        citySearchValue: payload.selectedCity.name || '',
         citiesSearchCollection: [],
         citySearchLoading: false
       }

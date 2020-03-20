@@ -20,7 +20,7 @@ const colors = {
     textColor: '#FFF',
     textDark: '#000',
     modalOverlayBg: '#000',
-    modalBg: '#fff',
+    modalBg: '#2f2f31',
     inputPrefixBg: '#fff'
   }
   

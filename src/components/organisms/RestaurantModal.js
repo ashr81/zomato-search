@@ -17,10 +17,10 @@ const RestaurantModal = ({
               <Flex>
                 <Flex flexDirection='column'>
                   <Text as='h3' fontWeight='bold' fontSize={6} color='danger' py={0} my={0}>{restaurant.name}</Text>
-                  <Text color='textDark' fontSize={2}>{restaurant.location.locality_verbose}</Text>
+                  <Text fontSize={2}>{restaurant.location.locality_verbose}</Text>
                   <Flex alignItems='center'>
-                    <Text mr={2} color='textDark'>Open between: </Text>
-                    <Text fontSize={2} color='textDark'>{restaurant.timings}</Text>
+                    <Text mr={2}>Open between: </Text>
+                    <Text fontSize={2}>{restaurant.timings}</Text>
                   </Flex>
                 </Flex>
                 <Flex flexGrow={1} flexDirection='column' alignItems='flex-end'>
@@ -34,7 +34,7 @@ const RestaurantModal = ({
                     <Text textAlign='center' fontSize={1}>{restaurant.all_reviews_count} votes</Text>
                   </Flex>
               </Flex>
-              <Text fontSize={2} color='textDark'>{restaurant.cuisines}</Text>
+              <Text fontSize={2}>{restaurant.cuisines}</Text>
               <Flex alignItems='center'>
                 <Text mr={2} as='h6' my={[1, 3]} py={0} fontWeight='bold'>Average cost for two(approx).</Text>
                 <Text fontSize={2}>{`${restaurant.currency} ${restaurant.average_cost_for_two}`}</Text>
