@@ -9,11 +9,11 @@ const RestuarantGridView = ({
   all_reviews_count: reviewsCount
 }) => {
   return (
-      <Flex cursor='pointer' backgroundColor='listCellBg' data-id={id} onClick={onClick} my={4} mx={[2, 0]} py={4} px={2} alignItems={['center', 'unset']} flexDirection={['column', 'row']}>
-        <Image m={2} src={thumb} size={'100%', 6}/>
+      <Flex cursor='pointer' backgroundColor='listCellBg' data-id={id} onClick={onClick} my={4} mx={[2, 2, 0]} py={4} px={2} alignItems={['center', 'center', 'unset']} flexDirection={['column', 'column', 'row']}>
+        <Image m={2} src={thumb} size={6}/>
         <Flex flexGrow={1}>
-            <Flex flexDirection='column' px={4} mt={1, 4}>
-              <Text as='h3' fontWeight='bold' fontSize={[3, 6]} color='danger' py={0} my={0}>{name}</Text>
+            <Flex flexDirection='column' px={4} mt={[1, 1, 4]}>
+              <Text as='h3' fontWeight='bold' fontSize={[3, 3, 6]} color='danger' py={0} my={0}>{name}</Text>
               <Text fontSize={2}>{location.locality_verbose}</Text>
               <Flex alignItems='center'>
                 <Text mr={2}>Open between: </Text>
@@ -21,7 +21,7 @@ const RestuarantGridView = ({
               </Flex>
               <Text fontSize={2}>{cuisines}</Text>
               <Flex alignItems='center'>
-                <Text mr={2} as='h6' my={[2, 4]} fontWeight='bold' fontSize={[2, 3]}>Average cost for two(approx).</Text>
+                <Text mr={2} as='h6' my={[2, 2, 4]} fontWeight='bold' fontSize={[2, 2, 3]}>Average cost for two(approx).</Text>
                 <Text fontSize={2}>{`${currency} ${averageCost}`}</Text>
               </Flex>
             </Flex>

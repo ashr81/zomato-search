@@ -716,11 +716,14 @@ const reducer = (state, action) => {
       }
     }
     case ADD_RESTAURANTS: {
+      let restaurants = payload.data.restaurants
+        .map(option => option.restaurant)
+        if(state.searchType !== SEARCH_TYPES.RESTAURANT) {
+          restaurants = restaurants.filter(option => option.user_rating.aggregate_rating >= state.filterByRating[0] && option.user_rating.aggregate_rating <= state.filterByRating[1])
+        }
       return {
         ...state,
-        restaurants: payload.data.restaurants
-          .map(option => option.restaurant)
-          .filter(option => option.user_rating.aggregate_rating >= state.filterByRating[0] && option.user_rating.aggregate_rating <= state.filterByRating[1]),
+        restaurants,
         restaurantsLoading: false
       }
     }
