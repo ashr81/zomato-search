@@ -33,7 +33,7 @@ const useFetchAPI = (
         }());
       }
     }
-  }, [isLoading, onError, onSuccess, options]);
+  }, [isLoading]);
   return { isLoading };
 };
 

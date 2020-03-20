@@ -119,6 +119,7 @@ const reducer = (state, action) => {
         ...state,
         citySearchLoading: false,
         citiesSearchCollection: payload.options,
+        restaurants: []
       };
     }
     case SELECT_CITY: {
@@ -126,7 +127,7 @@ const reducer = (state, action) => {
         ...state,
         citySearchValue: payload.selectedCity.name || '',
         citiesSearchCollection: [],
-        citySearchLoading: false,
+        citySearchLoading: false
       };
     }
     case CHANGE_FILTER_RATING: {

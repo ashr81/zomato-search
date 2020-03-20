@@ -41,7 +41,7 @@ const LocationModal = () => {
   }, [updateLocationInput]);
 
   useDebouceThrottleFetchAPI(
-    locationInput,
+    locationInput ? locationInput : false,
     {
       url: API_CITIES,
       params: {
