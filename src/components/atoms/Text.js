@@ -19,7 +19,10 @@ const Text = styled(Flex)`
 `
 
 Text.defaultProps = {
-  fontSize: 3
+  fontSize: 3,
+  as: 'p',
+  my: 0,
+  py: 0
 }
 
 export default Text;

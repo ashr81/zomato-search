@@ -73,7 +73,7 @@ const SearchInput = ({
   return (
     <FlexContainer ref={containerRef} {...props} onClick={() => updateDropdownOpen(true)}>
       <FlexInputContainer mt={6} width='100%'>
-        <InputPrefix px={2} mt={3} fontWeight='bold' fontSize={1} title={inputPrefix}>{inputPrefix}</InputPrefix>
+        <InputPrefix px={2} my={3} fontWeight='bold' fontSize={1} title={inputPrefix}>{inputPrefix}</InputPrefix>
         <Input px={0} pl={11} width='100%' onChange={onTextChange} value={value}/>
       </FlexInputContainer>
       <UnorderedList open={dropdownOpen}>

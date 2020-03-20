@@ -33,7 +33,7 @@ const Modal = ({
       <ModalContainer width={['100%', '500px', '800px']}>
         {children}
         {typeof(onClose) === 'function' ? <Flex as='footer' justifyContent='flex-end'>
-          <Button variant='danger' p={4} m={3} cursor='pointer' onClick={onClose}>Close</Button>
+          <Button variant='danger' p={4} m={4} cursor='pointer' onClick={onClose}>Close</Button>
         </Flex> : null}
       </ModalContainer>
     </Fragment> : null}
