@@ -7,9 +7,8 @@ import request from '../helpers/request';
 import { toast } from 'react-tiny-toast';
 
 const useFetchAPI = (
-  isLoading,
-  options,
-  onSuccess
+  isLoading, options,
+  onSuccess, onError
 )  => {
   useEffect(() => {
     if(isLoading) {
@@ -29,6 +28,7 @@ const useFetchAPI = (
             onSuccess(response)
           } catch(err) {
             toast.show(err.message, { variant: 'danger' })
+            onError(err)
           }
         })();
       }

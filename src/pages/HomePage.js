@@ -118,6 +118,11 @@ const HomePage = () => {
           data: response.data
         })
       }
+    },
+    () => {
+      dispatch({
+        restaurantsLoading: false
+      }) 
     }
   )
 

@@ -7,9 +7,8 @@ import request from '../helpers/request';
 import { toast } from 'react-tiny-toast';
 
 const useDebouceThrottleFetchAPI = (
-  value,
-  options,
-  onSuccess
+  value, options,
+  onSuccess, onError
 )  => {
   const timeoutIdRef = useRef(null)
   useEffect(() => {
@@ -22,6 +21,7 @@ const useDebouceThrottleFetchAPI = (
             onSuccess(response)
           } catch(err) {
             toast.show(err.message, { variant: 'danger' })
+            onError(err)
           }
         })();
       }
