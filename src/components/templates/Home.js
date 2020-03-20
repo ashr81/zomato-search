@@ -1,11 +1,11 @@
-import React, { Fragment, memo } from 'react';
+import React, { memo } from 'react';
 import { Flex, Text } from '../atoms';
 import { ToggleSwitch, SearchInput } from '../molecules';
 import { SEARCH_TYPES } from '../../actions/restaurants';
 import LocationModal from '../organisms/LocationModal';
 import {
   RestaurantsListElement, RestaurantsModal,
-  RestaurantsGridView, RestaurantsFilter
+  RestaurantsGridView, RestaurantsFilter,
 } from '../organisms/restaurants';
 import RestaurantsLoader from '../../content-loaders/RestaurantsLoader';
 
@@ -19,12 +19,12 @@ const Home = ({
   onOthersSearchSelect, selectedOtherSearchValues,
   sortBy, sortOrder, onSortByChange, onSortOrderChange,
   restaurantsLoading, citySearchLoading, filterByRating,
-  onChangeFilterByRating
+  onChangeFilterByRating,
 }) => {
-  const isSearchTypeRestaurant = searchType === SEARCH_TYPES.RESTAURANT
-  const searchTypePrefixText = isSearchTypeRestaurant ? 'Restaurants' : 'Cuisines, Category, Locality'
+  const isSearchTypeRestaurant = searchType === SEARCH_TYPES.RESTAURANT;
+  const searchTypePrefixText = isSearchTypeRestaurant ? 'Restaurants' : 'Cuisines, Category, Locality';
   return (
-    <Fragment>
+    <>
       <Flex flexDirection={['column', 'row']} width={['100%', '500px', '800px']}>
         <SearchInput
           mr={[2, 4]}
@@ -36,7 +36,7 @@ const Home = ({
           onSelectOption={onCitySelection}
           isLoading={citySearchLoading}
         />
-        <Flex flexDirection='column' flexGrow={2}>
+        <Flex flexDirection="column" flexGrow={2}>
           <SearchInput
             ml={[2, 4]}
             mr={[2, 0]}
@@ -50,36 +50,40 @@ const Home = ({
             onSelectOption={isSearchTypeRestaurant ? onPrimarySearchSelect : onOthersSearchSelect}
             CustomListElement={isSearchTypeRestaurant ? RestaurantsListElement : null}
           />
-          <Flex ml={[2, 4]} mt={4} alignItems='flex-end'>
-            <ToggleSwitch uniqueId='checkbox-search-type' checked={!isSearchTypeRestaurant} onChange={onSearchTypeChange}/>
+          <Flex ml={[2, 4]} mt={4} alignItems="flex-end">
+            <ToggleSwitch uniqueId="checkbox-search-type" checked={!isSearchTypeRestaurant} onChange={onSearchTypeChange} />
             <Text ml={2} fontSize={1}>{`Change search to ${isSearchTypeRestaurant ? 'cuisines, category and locality' : 'restaurants'}`}</Text>
           </Flex>
           <Flex ml={[2, 4]} mt={2}>
-            <Text fontSize={1} mr={2} fontWeight='bold'>Selected Cuisines, Categories: </Text>
-            <Text fontSize={1}>{selectedOtherSearchValues.map(i => i.name).join(', ')}</Text>
+            <Text fontSize={1} mr={2} fontWeight="bold">Selected Cuisines, Categories: </Text>
+            <Text fontSize={1}>{selectedOtherSearchValues.map((i) => i.name).join(', ')}</Text>
           </Flex>
         </Flex>
-        {!selectedLocation.id ? <LocationModal open={true} /> : null}
-        <RestaurantsModal open={!!selectedRestaurant.id} onClose={onCloseRestaurantModal} restaurant={selectedRestaurant}/>
+        {!selectedLocation.id ? <LocationModal open /> : null}
+        <RestaurantsModal open={!!selectedRestaurant.id} onClose={onCloseRestaurantModal} restaurant={selectedRestaurant} />
       </Flex>
       <Flex flexDirection={['column', 'row']} width={['100%', '500px', '800px']}>
         <RestaurantsFilter
-          sortOrder={sortOrder} sortBy={sortBy} filterByRating={filterByRating}
+          sortOrder={sortOrder}
+          sortBy={sortBy}
+          filterByRating={filterByRating}
           onSortByChange={onSortByChange}
           onSortOrderChange={onSortOrderChange}
           onChangeFilterByRating={onChangeFilterByRating}
         />
-        <Flex flexDirection='column'>
-          {isSearchTypeRestaurant ? null :
-            (restaurantsLoading ? 
-              <Fragment>
-                {[1, 2, 3].map(i => <RestaurantsLoader key={i}/>)}
-              </Fragment> : 
-              restaurants.map(restaurant => <RestaurantsGridView onClick={onPrimarySearchSelect} key={restaurant.id} {...restaurant}/>))}
+        <Flex flexDirection="column">
+          {isSearchTypeRestaurant ? null
+            : (restaurantsLoading
+              ? (
+                <>
+                  {[1, 2, 3].map((i) => <RestaurantsLoader key={i} />)}
+                </>
+              )
+              : restaurants.map((restaurant) => <RestaurantsGridView onClick={onPrimarySearchSelect} key={restaurant.id} {...restaurant} />))}
         </Flex>
       </Flex>
-    </Fragment>
-  )
-}
+    </>
+  );
+};
 
 export default memo(Home);

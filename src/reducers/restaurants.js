@@ -7,7 +7,7 @@ import {
   ORDERBY_OPTIONS,
   CHANGE_SORT_ORDER,
   CHANGE_SORTBY_OPTION,
-  CHANGE_FILTER_RATING
+  CHANGE_FILTER_RATING,
 } from '../actions/restaurants';
 
 export const initialState = {
@@ -27,12 +27,12 @@ export const initialState = {
   primarySearchValue: '',
   sortOrder: ORDERBY_OPTIONS.ASC,
   sortBy: '',
-  filterByRating: [0, 5]
-}
+  filterByRating: [0, 5],
+};
 
 const reducer = (state, action) => {
   const { type, ...payload } = action;
-  switch(type) {
+  switch (type) {
     case CHANGE_SEARCH_TYPE: {
       return {
         ...state,
@@ -40,46 +40,46 @@ const reducer = (state, action) => {
         selectedPrimarySearchValue: state.searchType === SEARCH_TYPES.RESTAURANT ? state.selectedRestaurant : state.selectedOtherSearchValues,
         primarySearchValue: '',
         restaurants: [],
-        restaurantsLoading: state.searchType === SEARCH_TYPES.RESTAURANT
-      }
+        restaurantsLoading: state.searchType === SEARCH_TYPES.RESTAURANT,
+      };
     }
     case ADD_OTHER_SEARCH_OPTIONS: {
-      const cuisines = payload.cuisines.data.cuisines.map(({ cuisine }) => ({id: cuisine.cuisine_id, name: cuisine.cuisine_name}));
-      const categories = payload.categories.data.categories.map(category => category.categories)
+      const cuisines = payload.cuisines.data.cuisines.map(({ cuisine }) => ({ id: cuisine.cuisine_id, name: cuisine.cuisine_name }));
+      const categories = payload.categories.data.categories.map((category) => category.categories);
       return {
         ...state,
         otherSearchOptions: {
           [ENTITY_CUISINES]: cuisines,
-          [ENTITY_CATEGORIES]: categories
-        }
-      }
+          [ENTITY_CATEGORIES]: categories,
+        },
+      };
     }
     case CHANGE_SORT_ORDER:
     case CHANGE_SORTBY_OPTION: {
       return {
         ...state,
         ...payload,
-        restaurantsLoading: state.searchType !== SEARCH_TYPES.RESTAURANT
-      }
+        restaurantsLoading: state.searchType !== SEARCH_TYPES.RESTAURANT,
+      };
     }
     case CHANGE_PRIMARY_SEARCH_TEXT: {
       return {
         ...state,
         restaurantsLoading: true,
-        primarySearchValue: payload.value
-      }
+        primarySearchValue: payload.value,
+      };
     }
     case ADD_RESTAURANTS: {
       let restaurants = payload.data.restaurants
-        .map(option => option.restaurant)
-        if(state.searchType !== SEARCH_TYPES.RESTAURANT) {
-          restaurants = restaurants.filter(option => option.user_rating.aggregate_rating >= state.filterByRating[0] && option.user_rating.aggregate_rating <= state.filterByRating[1])
-        }
+        .map((option) => option.restaurant);
+      if (state.searchType !== SEARCH_TYPES.RESTAURANT) {
+        restaurants = restaurants.filter((option) => option.user_rating.aggregate_rating >= state.filterByRating[0] && option.user_rating.aggregate_rating <= state.filterByRating[1]);
+      }
       return {
         ...state,
         restaurants,
-        restaurantsLoading: false
-      }
+        restaurantsLoading: false,
+      };
     }
     case CLOSE_RESTAURANT_MODAL: {
       return {
@@ -87,63 +87,63 @@ const reducer = (state, action) => {
         restaurants: state.searchType === SEARCH_TYPES.RESTAURANT ? [] : state.restaurants,
         selectedRestaurant: {},
         restaurantsLoading: false,
-        primarySearchValue: state.searchType === SEARCH_TYPES.RESTAURANT ? '' : state.primarySearchValue
-      }
+        primarySearchValue: state.searchType === SEARCH_TYPES.RESTAURANT ? '' : state.primarySearchValue,
+      };
     }
     case SELECT_RESTAURANT: {
       return {
         ...state,
-        selectedRestaurant: state.restaurants.filter(restaurant => restaurant.id === payload.restaurantId)[0]
-      }
+        selectedRestaurant: state.restaurants.filter((restaurant) => restaurant.id === payload.restaurantId)[0],
+      };
     }
     case SELECT_OTHER_SEARCH: {
-      const entityId = parseInt(payload.entityId)
-      const isExist = state.selectedOtherSearchValues.some(value => value.id === entityId && value.type === payload.entityType);
+      const entityId = parseInt(payload.entityId);
+      const isExist = state.selectedOtherSearchValues.some((value) => value.id === entityId && value.type === payload.entityType);
       return {
         ...state,
-        selectedOtherSearchValues: isExist ?
-        state.selectedOtherSearchValues.filter(value => value.id !== entityId || value.type !== payload.entityType) :
-        [...state.selectedOtherSearchValues, {id: entityId, type: payload.entityType, name: payload.entityName}],
-        restaurantsLoading: true
-      }
+        selectedOtherSearchValues: isExist
+          ? state.selectedOtherSearchValues.filter((value) => value.id !== entityId || value.type !== payload.entityType)
+          : [...state.selectedOtherSearchValues, { id: entityId, type: payload.entityType, name: payload.entityName }],
+        restaurantsLoading: true,
+      };
     }
     case CHANGE_CITY_SEARCH_TEXT: {
       return {
         ...state,
         citySearchLoading: true,
-        citySearchValue: payload.value
-      }
+        citySearchValue: payload.value,
+      };
     }
     case CHANGE_CITY_SEARCH_OPTIONS: {
       return {
         ...state,
         citySearchLoading: false,
         citiesSearchCollection: payload.options,
-      }
+      };
     }
     case SELECT_CITY: {
       return {
         ...state,
         citySearchValue: payload.selectedCity.name || '',
         citiesSearchCollection: [],
-        citySearchLoading: false
-      }
+        citySearchLoading: false,
+      };
     }
     case CHANGE_FILTER_RATING: {
-      state.filterByRating[payload.index] = payload.value
+      state.filterByRating[payload.index] = payload.value;
       return {
         ...state,
         filterByRating: [...state.filterByRating],
-        restaurantsLoading: true
-      }
+        restaurantsLoading: true,
+      };
     }
     default: {
       return {
         ...state,
-        ...payload
-      }
+        ...payload,
+      };
     }
   }
-}
+};
 
 export default reducer;

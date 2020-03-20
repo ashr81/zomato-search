@@ -11,8 +11,8 @@ const ModalOverlay = styled(Flex)`
   left: 0px;
   opacity: 0.6;
   z-index: 10;
-  background-color: ${({ theme: { colors }}) => colors.modalOverlayBg};
-`
+  background-color: ${({ theme: { colors } }) => colors.modalOverlayBg};
+`;
 
 const ModalContainer = styled(Flex)`
   position: fixed;
@@ -21,23 +21,27 @@ const ModalContainer = styled(Flex)`
   left: 50%;
   flex-direction: column;
   z-index: 11;
-  background-color: ${({ theme: { colors }}) => colors.modalBg};
-`
+  background-color: ${({ theme: { colors } }) => colors.modalBg};
+`;
 const Modal = ({
   open, children,
-  onClose
-}) => {
-  return(<Portals>
-    {open ? <Fragment>
-      <ModalOverlay/>
-      <ModalContainer width={['100%', '500px', '800px']}>
-        {children}
-        {typeof(onClose) === 'function' ? <Flex as='footer' justifyContent='flex-end'>
-          <Button variant='danger' p={4} m={4} cursor='pointer' onClick={onClose}>Close</Button>
-        </Flex> : null}
-      </ModalContainer>
-    </Fragment> : null}
-  </Portals>)
-}
+  onClose,
+}) => (
+  <Portals>
+    {open ? (
+      <>
+        <ModalOverlay />
+        <ModalContainer width={['100%', '500px', '800px']}>
+          {children}
+          {typeof (onClose) === 'function' ? (
+            <Flex as="footer" justifyContent="flex-end">
+              <Button variant="danger" p={4} m={4} cursor="pointer" onClick={onClose}>Close</Button>
+            </Flex>
+          ) : null}
+        </ModalContainer>
+      </>
+    ) : null}
+  </Portals>
+);
 
 export default Modal;

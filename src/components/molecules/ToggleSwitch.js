@@ -26,7 +26,7 @@ const ToggleSwitchContainer = styled(Flex)`
     left: 0px;
     ${({ checked }) => checked === false && css`display: none;`}
   }
-`
+`;
 
 const ToggleSwitchLabel = styled.label`
   width: 100%;
@@ -49,7 +49,7 @@ const ToggleSwitchLabel = styled.label`
     box-shadow: 1px 3px 3px 1px rgba(0, 0, 0, 0.2);
     transition: 0.2s;
   }
-`
+`;
 
 const CheckboxHidden = styled.input.attrs(() => ({ type: 'checkbox' }))`
   width: 100%;
@@ -58,7 +58,7 @@ const CheckboxHidden = styled.input.attrs(() => ({ type: 'checkbox' }))`
   z-index: 1;
   cursor: pointer;
   &:checked + ${ToggleSwitchLabel} {
-    background-color: ${({ theme: { colors }}) => colors.toggleSwitchBg};
+    background-color: ${({ theme: { colors } }) => colors.toggleSwitchBg};
     &:after {
       content: '';
       z-index: 2;
@@ -70,26 +70,24 @@ const CheckboxHidden = styled.input.attrs(() => ({ type: 'checkbox' }))`
       transition: 0.2s;
     }
   }
-`
+`;
 
 const ToggleSwitch = ({
   checked, onChange,
-  pseudoElementsContent, uniqueId
-}) => {
-  return (
-    <ToggleSwitchContainer checked={checked} pseudoElementsContent={pseudoElementsContent}>
-      <CheckboxHidden id={uniqueId} checked={checked} onChange={onChange}/>
-      <ToggleSwitchLabel htmlFor={uniqueId}/>
-    </ToggleSwitchContainer>
-  )
-}
+  pseudoElementsContent, uniqueId,
+}) => (
+  <ToggleSwitchContainer checked={checked} pseudoElementsContent={pseudoElementsContent}>
+    <CheckboxHidden id={uniqueId} checked={checked} onChange={onChange} />
+    <ToggleSwitchLabel htmlFor={uniqueId} />
+  </ToggleSwitchContainer>
+);
 
 ToggleSwitch.defaultProps = {
   pseudoElementsContent: {
     before: '',
-    after: ''
+    after: '',
   },
-  uniqueId: 'checkbox'
-}
+  uniqueId: 'checkbox',
+};
 
 export default ToggleSwitch;

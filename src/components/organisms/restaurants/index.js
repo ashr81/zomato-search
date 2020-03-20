@@ -9,5 +9,5 @@ const RestaurantsModal = withSuspenseLoader(lazy(() => import(/* webpackPrefetch
 
 export {
   RestaurantsFilter, RestaurantsGridView,
-  RestaurantsListElement, RestaurantsModal
-}
+  RestaurantsListElement, RestaurantsModal,
+};

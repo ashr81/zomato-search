@@ -5,8 +5,8 @@ const useLocationDetails = () => {
   const { selectedLocation, updateSelectedLocation } = useContext(LocationDetailsContext);
 
   return {
-    selectedLocation, updateSelectedLocation
-  }
-}
+    selectedLocation, updateSelectedLocation,
+  };
+};
 
 export default useLocationDetails;

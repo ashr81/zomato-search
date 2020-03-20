@@ -1,14 +1,14 @@
 export const SEARCH_TYPES = {
   RESTAURANT: 'RESTAURANT',
-  OTHERS: 'OTHERS'
-}
+  OTHERS: 'OTHERS',
+};
 
 export const ORDERBY_OPTIONS = {
   ASC: 'asc',
-  DESC: 'desc'
-}
+  DESC: 'desc',
+};
 
-export const SORTBY_OPTIONS = ['rating', 'price']
+export const SORTBY_OPTIONS = ['rating', 'price'];
 
 export const CHANGE_SEARCH_TYPE = 'CHANGE_SEARCH_TYPE';
 export const CHANGE_CITY_SEARCH_TEXT = 'CHANGE_CITY_SEARCH_TEXT';

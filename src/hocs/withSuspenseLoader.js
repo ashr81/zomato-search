@@ -4,12 +4,10 @@
  */
 import React, { Suspense } from 'react';
 
-const withSuspenseLoader = (RouteComponent, CustomLoader) => (props) => {
-  return (
-    <Suspense fallback={CustomLoader ? <CustomLoader /> : <div>loading..,</div>}>
-      <RouteComponent {...props}/>
-    </Suspense>
-  )
-}
+const withSuspenseLoader = (RouteComponent, CustomLoader) => (props) => (
+  <Suspense fallback={CustomLoader ? <CustomLoader /> : <div>loading..,</div>}>
+    <RouteComponent {...props} />
+  </Suspense>
+);
 
 export default withSuspenseLoader;

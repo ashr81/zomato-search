@@ -4,8 +4,8 @@
  * under the ThemeProvider context provided by styled-components.
  */
 import styled, { css } from 'styled-components';
-import { 
-  background, color, border, layout, position, space, typography, fontStyle, colorStyle
+import {
+  background, color, border, layout, position, space, typography, fontStyle, colorStyle,
 } from 'styled-system';
 
 const Box = styled.div`
@@ -21,6 +21,6 @@ const Box = styled.div`
   ${({ cursor }) => cursor && css`
     cursor: ${cursor};
   `}
-`
+`;
 
 export default Box;

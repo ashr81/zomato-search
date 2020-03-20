@@ -3,7 +3,7 @@
  * and dynamically swaping the element type to input.
  */
 import styled from 'styled-components';
-import { Flex } from '.';
+import Flex from './Flex';
 
 const Input = styled(Flex)`
   &[type=number]::-webkit-inner-spin-button,
@@ -11,7 +11,7 @@ const Input = styled(Flex)`
     -webkit-appearance: none;
     margin: 0;
   }
-`
+`;
 
 Input.defaultProps = {
   as: 'input',
@@ -20,7 +20,7 @@ Input.defaultProps = {
   borderRadius: 3,
   borderColor: 'border',
   borderStyle: 'solid',
-  borderWidth: '1px'
-}
+  borderWidth: '1px',
+};
 
 export default Input;

@@ -3,16 +3,16 @@
  * and dynamically swaping the element type to button.
  */
 import styled from 'styled-components';
-import Flex from './Flex';
 import { buttonStyle } from 'styled-system';
+import Flex from './Flex';
 
 const Button = styled(Flex)`
   ${buttonStyle}
-`
+`;
 
 Button.defaultProps = {
   variant: 'primary',
-  as: 'button'
-}
+  as: 'button',
+};
 
 export default Button;

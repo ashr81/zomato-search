@@ -2,17 +2,17 @@ import { useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 const Portals = ({ children }) => {
-  const modalNodeRef = useRef(document.getElementById('modal-root'))
+  const modalNodeRef = useRef(document.getElementById('modal-root'));
 
-  if(!modalNodeRef.current) {
+  if (!modalNodeRef.current) {
     return null;
   }
   return (
     createPortal(
       children,
-      modalNodeRef.current
+      modalNodeRef.current,
     )
-  )
-}
+  );
+};
 
 export default Portals;

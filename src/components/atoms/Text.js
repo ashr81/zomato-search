@@ -4,7 +4,7 @@
  */
 import styled, { css } from 'styled-components';
 import { typography, fontSize, textStyle } from 'styled-system';
-import { Flex } from '.';
+import Flex from './Flex';
 
 const Text = styled(Flex)`
   ${typography}
@@ -16,14 +16,14 @@ const Text = styled(Flex)`
   ${({ cursor }) => cursor && css`
     cursor: ${cursor}
   `}
-`
+`;
 
 Text.defaultProps = {
   fontSize: 3,
   as: 'p',
   my: 0,
   py: 0,
-  color: 'textColor'
-}
+  color: 'textColor',
+};
 
 export default Text;

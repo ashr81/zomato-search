@@ -6,69 +6,69 @@ import { API_CITIES } from '../../routes/api';
 
 const LocationModal = () => {
   const { selectedLocation, updateSelectedLocation } = useLocationDetails();
-  const [locationCoordinates, updateLocationCoordinates] = useState(selectedLocation)
-  const [locationInput, updateLocationInput] = useState('')
-  const [loadingOptions, updateLoadingOptions] = useState(false)
-  const [options, updateOptions] = useState([])
-  
+  const [locationCoordinates, updateLocationCoordinates] = useState(selectedLocation);
+  const [locationInput, updateLocationInput] = useState('');
+  const [loadingOptions, updateLoadingOptions] = useState(false);
+  const [options, updateOptions] = useState([]);
+
   useFetchAPI(!!locationCoordinates.latitude, {
     url: API_CITIES,
     params: {
       lat: locationCoordinates.latitude,
-      lon: locationCoordinates.longitude
-    }
+      lon: locationCoordinates.longitude,
+    },
   }, (response) => {
-    if(response?.data?.location_suggestions?.length) {
-      updateLocationInput(response.data.location_suggestions[0].name)
-      updateSelectedLocation(response.data.location_suggestions[0])
+    if (response?.data?.location_suggestions?.length) {
+      updateLocationInput(response.data.location_suggestions[0].name);
+      updateSelectedLocation(response.data.location_suggestions[0]);
     }
-  })
+  });
 
   useEffect(() => {
-    if(!selectedLocation.id) {
+    if (!selectedLocation.id) {
       window.navigator.geolocation.getCurrentPosition((location) => {
-        updateLocationCoordinates(location.coords)
-      })
+        updateLocationCoordinates(location.coords);
+      });
     }
-  }, [selectedLocation.id, updateLocationCoordinates])
+  }, [selectedLocation.id, updateLocationCoordinates]);
 
   useEffect(() => {
-    if(locationInput) updateLoadingOptions(true);
-  }, [locationInput])
+    if (locationInput) updateLoadingOptions(true);
+  }, [locationInput]);
 
   const onTextChange = useCallback((event) => {
-    updateLocationInput(event.currentTarget.value)
-  }, [updateLocationInput])
+    updateLocationInput(event.currentTarget.value);
+  }, [updateLocationInput]);
 
   useDebouceThrottleFetchAPI(
     locationInput,
     {
       url: API_CITIES,
       params: {
-        q: locationInput
-      }
+        q: locationInput,
+      },
     },
     (response) => {
-      if(response.config.params.q === locationInput) {
-        updateOptions(response.data.location_suggestions)
-        updateLoadingOptions(false)
+      if (response.config.params.q === locationInput) {
+        updateOptions(response.data.location_suggestions);
+        updateLoadingOptions(false);
       }
     },
     () => {
-      updateLoadingOptions(false)
-    }
-  )
+      updateLoadingOptions(false);
+    },
+  );
 
   const onSelectOption = (event) => {
-    const cityId = parseInt(event.currentTarget.dataset.id)
-    updateSelectedLocation(options.filter(city => city.id === cityId)[0])
-  }
+    const cityId = parseInt(event.currentTarget.dataset.id);
+    updateSelectedLocation(options.filter((city) => city.id === cityId)[0]);
+  };
 
   return (
     <Modal open={!selectedLocation.id}>
       <Flex>
         <SearchInput
-          width='100%'
+          width="100%"
           mb={4}
           px={4}
           isLoading={loadingOptions}
@@ -80,7 +80,7 @@ const LocationModal = () => {
         />
       </Flex>
     </Modal>
-  )
-}
+  );
+};
 
 export default LocationModal;

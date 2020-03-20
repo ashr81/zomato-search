@@ -10,7 +10,7 @@ import Navbar from './components/organisms/Navbar';
 import withLocationDetails from './hocs/withLocationDetails';
 
 const App = () => {
-  const [theme, updateTheme] = useState(normal)
+  const [theme, updateTheme] = useState(normal);
 
   return (
     <ThemeProvider theme={theme}>
@@ -18,12 +18,12 @@ const App = () => {
       <Layout changeTheme={updateTheme}>
         <Switch>
           {publicRoutes}
-          <Route component={NotFoundPage}/>
+          <Route component={NotFoundPage} />
         </Switch>
       </Layout>
       <ToastContainer />
     </ThemeProvider>
   );
-}
+};
 
 export default withLocationDetails(App);

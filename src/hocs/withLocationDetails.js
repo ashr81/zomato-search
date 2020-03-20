@@ -8,25 +8,25 @@ import { LocationDetailsContext } from '../contexts';
 
 const LOCATION_DETAILS_LOCAL_STORAGE = 'LOCATION_DETAILS_LOCAL_STORAGE';
 const withLocationDetails = (Component) => (props) => {
-  const [selectedLocation, updateSelectedLocation] = useState({})
+  const [selectedLocation, updateSelectedLocation] = useState({});
 
   useEffect(() => {
-    const locationStore = window.localStorage.getItem(LOCATION_DETAILS_LOCAL_STORAGE)
-    if(locationStore) {
-      updateSelectedLocation(JSON.parse(locationStore))
+    const locationStore = window.localStorage.getItem(LOCATION_DETAILS_LOCAL_STORAGE);
+    if (locationStore) {
+      updateSelectedLocation(JSON.parse(locationStore));
     }
-  }, [updateSelectedLocation])
+  }, [updateSelectedLocation]);
 
   useEffect(() => {
-    if(selectedLocation.name) {
-      window.localStorage.setItem(LOCATION_DETAILS_LOCAL_STORAGE, JSON.stringify(selectedLocation))
+    if (selectedLocation.name) {
+      window.localStorage.setItem(LOCATION_DETAILS_LOCAL_STORAGE, JSON.stringify(selectedLocation));
     }
-  }, [selectedLocation])
+  }, [selectedLocation]);
   return (
     <LocationDetailsContext.Provider value={{ selectedLocation, updateSelectedLocation }}>
-      <Component {...props}/>
+      <Component {...props} />
     </LocationDetailsContext.Provider>
-  )
-}
+  );
+};
 
 export default withLocationDetails;

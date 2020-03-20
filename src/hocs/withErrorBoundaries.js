@@ -10,21 +10,21 @@ import SomethingWentWrongPage from '../pages/error/SomethingWentWrongPage';
 class ErrorBoundary extends React.Component {
   state = {
     isError: false,
-    info: null
+    info: null,
   }
 
   componentDidCatch(_error, errorInfo) {
     this.setState({
       isError: true,
-      info: errorInfo
-    })
+      info: errorInfo,
+    });
   }
 
   render() {
     const { isError } = this.state;
     const { children } = this.props;
     if (isError) {
-      return (<SomethingWentWrongPage />)
+      return (<SomethingWentWrongPage />);
     }
     return children;
   }
@@ -32,13 +32,11 @@ class ErrorBoundary extends React.Component {
 
 
 const withErrorBoundary = (
-  Component
-) => {
-  return (props) => (
-    <ErrorBoundary>
-      <Component {...props}/>
-    </ErrorBoundary>
-  )
-}
+  Component,
+) => (props) => (
+  <ErrorBoundary>
+    <Component {...props} />
+  </ErrorBoundary>
+);
 
 export default withErrorBoundary;
