@@ -10,7 +10,7 @@ const RestaurantFilter = ({
 }) => {
   return (
     <Flex flexDirection={'column'} mx={[2, 0]} mt={2} width={['unset', '120px']}>
-      <Flex>
+      <Flex flexDirection={['row', 'column']}>
         <Flex my={[3, 1]} mr={3} flexDirection={['row',  'column']}>
           <Text fontSize={1} fontWeight='bold'>Order:</Text>
           <Text fontSize={1} textStyle='secondary' onClick={onSortOrderChange} data-selected={sortOrder === ORDERBY_OPTIONS.ASC} px={[2, 0]}>{ORDERBY_OPTIONS.ASC}</Text>

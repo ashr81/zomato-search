@@ -40,7 +40,7 @@ const HomePage = () => {
   const onCitySelection = useCallback((event) => {
     const cityId = parseInt(event.currentTarget.dataset.id)
     updateSelectedLocation(state.citiesSearchCollection.filter(city => city.id === cityId)[0])
-  }, [dispatch, updateSelectedLocation, state.citiesSearchCollection])
+  }, [updateSelectedLocation, state.citiesSearchCollection])
 
   useEffect(() => {
     if(selectedLocation.id) {
