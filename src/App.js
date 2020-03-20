@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components'
+import { ThemeProvider } from 'styled-components';
+import { ToastContainer } from 'react-tiny-toast';
 import publicRoutes from './routes/public';
 import { normal } from './themes';
 import NotFoundPage from './pages/error/NotFoundPage';
@@ -20,6 +21,7 @@ const App = () => {
           <Route component={NotFoundPage}/>
         </Switch>
       </Layout>
+      <ToastContainer />
     </ThemeProvider>
   );
 }

@@ -4,6 +4,7 @@
  */
 import { useEffect } from 'react';
 import request from '../helpers/request';
+import { toast } from 'react-tiny-toast';
 
 const useFetchAPI = (
   isLoading,
@@ -18,7 +19,7 @@ const useFetchAPI = (
           .all(options.map(option => request(option)))
           .then(onSuccess)
           .catch((err) => {
-            window.alert(err.message)
+            toast.show(err.message, { variant: 'danger' })
           })
       } else {
         // when options are object. only single API call is enough.
@@ -27,7 +28,7 @@ const useFetchAPI = (
             const response = await request(options)
             onSuccess(response)
           } catch(err) {
-            window.alert(err.message);
+            toast.show(err.message, { variant: 'danger' })
           }
         })();
       }

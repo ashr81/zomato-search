@@ -4,6 +4,7 @@
  */
 import { useEffect, useRef } from 'react';
 import request from '../helpers/request';
+import { toast } from 'react-tiny-toast';
 
 const useDebouceThrottleFetchAPI = (
   value,
@@ -20,7 +21,7 @@ const useDebouceThrottleFetchAPI = (
             const response = await request(options)
             onSuccess(response)
           } catch(err) {
-            window.alert(err.message);
+            toast.show(err.message, { variant: 'danger' })
           }
         })();
       }

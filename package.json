@@ -13,6 +13,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
     "react-spring": "^8.0.27",
+    "react-tiny-toast": "^0.1.17",
     "styled-components": "^5.0.1",
     "styled-system": "^5.1.5"
   },
