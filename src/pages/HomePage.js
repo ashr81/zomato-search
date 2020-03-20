@@ -5,7 +5,7 @@ import {
   CHANGE_SEARCH_TYPE, CHANGE_CITY_SEARCH_TEXT, CHANGE_PRIMARY_SEARCH_TEXT,
   CHANGE_CITY_SEARCH_OPTIONS, SELECT_CITY, ADD_RESTAURANTS, SELECT_RESTAURANT,
   CLOSE_RESTAURANT_MODAL, ADD_OTHER_SEARCH_OPTIONS, SELECT_OTHER_SEARCH,
-  ENTITY_CUISINES, ENTITY_CATEGORIES, CHANGE_SORTBY_OPTION, CHANGE_SORT_ORDER
+  ENTITY_CUISINES, ENTITY_CATEGORIES, CHANGE_SORTBY_OPTION, CHANGE_SORT_ORDER, CHANGE_FILTER_RATING
 } from '../actions/restaurants';
 import { useLocationDetails, useDebouceThrottleFetchAPI, useFetchAPI } from '../custom-hooks';
 import { API_CITIES, API_SEARCH, API_CATEGORIES, API_CUISINES } from '../routes/api';
@@ -62,7 +62,16 @@ const HomePage = () => {
     dispatch({
       type: SELECT_OTHER_SEARCH,
       entityId: event.currentTarget.dataset.id,
-      entityType: event.currentTarget.dataset.type
+      entityType: event.currentTarget.dataset.type,
+      entityName: event.currentTarget.dataset.name
+    })
+  }, [dispatch])
+
+  const onChangeFilterByRating = useCallback((event) => {
+    dispatch({
+      type: CHANGE_FILTER_RATING,
+      value: event.currentTarget.value,
+      index: event.currentTarget.dataset.index
     })
   }, [dispatch])
 
@@ -162,6 +171,7 @@ const HomePage = () => {
       onOthersSearchSelect={onOthersSearchSelect}
       onSortOrderChange={onSortOrderChange}
       onSortByChange={onSortByChange}
+      onChangeFilterByRating={onChangeFilterByRating}
     />
   )
 }

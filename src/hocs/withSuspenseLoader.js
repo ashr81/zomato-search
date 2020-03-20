@@ -4,9 +4,9 @@
  */
 import React, { Suspense } from 'react';
 
-const withSuspenseLoader = (RouteComponent) => (props) => {
+const withSuspenseLoader = (RouteComponent, CustomLoader) => (props) => {
   return (
-    <Suspense fallback={<div>loading..,</div>}>
+    <Suspense fallback={CustomLoader ? <CustomLoader /> : <div>loading..,</div>}>
       <RouteComponent {...props}/>
     </Suspense>
   )

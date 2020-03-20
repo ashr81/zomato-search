@@ -1,6 +1,6 @@
 import React from 'react';
-import { Flex, Text, Image } from '../atoms';
-import { Modal, Carousel } from '../molecules';
+import { Flex, Text, Image } from '../../atoms';
+import { Modal, Carousel } from '../../molecules';
 
 const RestaurantModal = ({
   open, onClose, restaurant

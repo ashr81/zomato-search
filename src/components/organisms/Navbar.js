@@ -1,14 +1,10 @@
 import React from 'react';
-import { Flex, Input } from '../atoms';
+import { Flex, Text } from '../atoms';
 
-const Navbar = ({
-
-}) => {
-  return (
-    <Flex width='100%' backgroundColor='navbarBg' color='navbarColor' height='40px' alignItems='center' fontSize={[2, 3]}>
-      
-    </Flex>
-  )
-}
+const Navbar = () => (
+  <Flex width='100%' backgroundColor='navbarBg' color='navbarColor' height='40px' justifyContent='center' alignItems='center' fontSize={[2, 3]}>
+    <Text color='navbarColor' fontWeight='bold'>One stop for your appetite.</Text>
+  </Flex>
+)
 
 export default Navbar;

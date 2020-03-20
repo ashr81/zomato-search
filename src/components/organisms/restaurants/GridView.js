@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, Text, Image } from '../atoms';
+import { Flex, Text, Image } from '../../atoms';
 
 const RestuarantGridView = ({
   name, thumb, location, id,

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Flex, Text, Image } from '../atoms';
+import { Flex, Text, Image } from '../../atoms';
 
 const ListElementContainer = styled(Flex).attrs(() => ({ as: 'li' }))`
   cursor: pointer;

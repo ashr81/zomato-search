@@ -1,13 +1,13 @@
 import React, { Fragment, memo } from 'react';
 import { Flex, Text } from '../atoms';
-import { ToggleSwitch, SearchInput, RadioOptions } from '../molecules';
-import { SEARCH_TYPES, SORTBY_OPTIONS, ORDERBY_OPTIONS } from '../../actions/restaurants';
+import { ToggleSwitch, SearchInput } from '../molecules';
+import { SEARCH_TYPES } from '../../actions/restaurants';
 import LocationModal from '../organisms/LocationModal';
-import RestaurantListElement from '../organisms/RestaurantListElement';
-import RestaurantModal from '../organisms/RestaurantModal';
-import RestaurantGridView from '../organisms/RestaurantGridView';
+import {
+  RestaurantsListElement, RestaurantsModal,
+  RestaurantsGridView, RestaurantsFilter
+} from '../organisms/restaurants';
 import RestaurantsLoader from '../../content-loaders/RestaurantsLoader';
-import RestaurantFilter from '../organisms/RestaurantFilter';
 
 const Home = ({
   searchType, onSearchTypeChange, selectedLocation,
@@ -18,7 +18,8 @@ const Home = ({
   onCloseRestaurantModal, otherSearchOptions,
   onOthersSearchSelect, selectedOtherSearchValues,
   sortBy, sortOrder, onSortByChange, onSortOrderChange,
-  restaurantsLoading, citySearchLoading
+  restaurantsLoading, citySearchLoading, filterByRating,
+  onChangeFilterByRating
 }) => {
   const isSearchTypeRestaurant = searchType === SEARCH_TYPES.RESTAURANT
   const searchTypePrefixText = isSearchTypeRestaurant ? 'Restaurants' : 'Cuisines, Category, Locality'
@@ -39,6 +40,7 @@ const Home = ({
           <SearchInput
             ml={[2, 4]}
             mr={[2, 0]}
+            helpText={isSearchTypeRestaurant ? null : '*Only locality is allowed.'}
             isLoading={isSearchTypeRestaurant && restaurantsLoading}
             inputPrefix={searchTypePrefixText}
             selectedValue={isSearchTypeRestaurant ? selectedPrimarySearchValue : selectedOtherSearchValues}
@@ -46,7 +48,7 @@ const Home = ({
             value={primarySearchValue}
             options={isSearchTypeRestaurant ? restaurants : otherSearchOptions}
             onSelectOption={isSearchTypeRestaurant ? onPrimarySearchSelect : onOthersSearchSelect}
-            CustomListElement={isSearchTypeRestaurant ? RestaurantListElement : null}
+            CustomListElement={isSearchTypeRestaurant ? RestaurantsListElement : null}
           />
           <Flex ml={[2, 4]} mt={4} alignItems='flex-end'>
             <ToggleSwitch uniqueId='checkbox-search-type' checked={!isSearchTypeRestaurant} onChange={onSearchTypeChange}/>
@@ -54,13 +56,14 @@ const Home = ({
           </Flex>
         </Flex>
         {!selectedLocation.id ? <LocationModal open={true} /> : null}
-        <RestaurantModal open={!!selectedRestaurant.id} onClose={onCloseRestaurantModal} restaurant={selectedRestaurant}/>
+        <RestaurantsModal open={!!selectedRestaurant.id} onClose={onCloseRestaurantModal} restaurant={selectedRestaurant}/>
       </Flex>
       <Flex flexDirection={['column', 'row']} width={['100%', '500px', '800px']}>
-        <RestaurantFilter
-          sortOrder={sortOrder} sortBy={sortBy}
+        <RestaurantsFilter
+          sortOrder={sortOrder} sortBy={sortBy} filterByRating={filterByRating}
           onSortByChange={onSortByChange}
           onSortOrderChange={onSortOrderChange}
+          onChangeFilterByRating={onChangeFilterByRating}
         />
         <Flex flexDirection='column'>
           {isSearchTypeRestaurant ? null :
@@ -68,7 +71,7 @@ const Home = ({
               <Fragment>
                 {[1, 2, 3].map(i => <RestaurantsLoader key={i}/>)}
               </Fragment> : 
-              restaurants.map(restaurant => <RestaurantGridView onClick={onPrimarySearchSelect} key={restaurant.id} {...restaurant}/>))}
+              restaurants.map(restaurant => <RestaurantsGridView onClick={onPrimarySearchSelect} key={restaurant.id} {...restaurant}/>))}
         </Flex>
       </Flex>
     </Fragment>

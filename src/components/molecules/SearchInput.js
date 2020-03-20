@@ -50,9 +50,15 @@ const ListElement = styled(Flex).attrs(() => ({ as: 'li' }))`
   }
 `
 
+const HelpText = styled(Text)`
+  position: absolute;
+  top: -14px;
+  right: 0px;
+`
+
 const SearchInput = ({
   selectedValue, onTextChange, onSelectOption, isLoading,
-  options, inputPrefix, value, CustomListElement, ...props
+  options, inputPrefix, value, CustomListElement, helpText, ...props
 }) => {
   const [dropdownOpen, updateDropdownOpen] = useState(false)
   const containerRef = useRef(null)
@@ -73,6 +79,7 @@ const SearchInput = ({
   return (
     <FlexContainer ref={containerRef} {...props} onClick={() => updateDropdownOpen(true)}>
       <FlexInputContainer mt={6} width='100%'>
+        <HelpText fontSize={1}>{helpText}</HelpText>
         <InputPrefix px={2} my={3} color='unset' fontWeight='bold' fontSize={1} title={inputPrefix}>{inputPrefix}</InputPrefix>
         <Input px={0} pl={11} width='100%' onChange={onTextChange} value={value}/>
       </FlexInputContainer>
@@ -87,7 +94,7 @@ const SearchInput = ({
               <Text backgroundColor='layoutBg' pl={10} py={3} textTransform='capitalize' fontWeight='bold' fontSize={3}>{optionType}</Text>
               {options[optionType].map(elem => {
                 const selected = selectedValue.some(value => value.id === elem.id && value.type === optionType)
-                return <ListElement pl={11} py={3} pr={3} key={elem.id} selected={selected} data-type={optionType} data-id={elem.id} onClick={onSelectOption}>{elem.name}</ListElement>
+                return <ListElement pl={11} py={3} pr={3} key={elem.id} data-name={elem.name} selected={selected} data-type={optionType} data-id={elem.id} onClick={onSelectOption}>{elem.name}</ListElement>
             })}</Fragment>
           })))
         }

@@ -5,7 +5,13 @@
 import styled from 'styled-components';
 import { Flex } from '.';
 
-const Input = styled(Flex)``
+const Input = styled(Flex)`
+  &[type=number]::-webkit-inner-spin-button,
+  &[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+`
 
 Input.defaultProps = {
   as: 'input',
