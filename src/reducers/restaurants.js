@@ -103,7 +103,7 @@ const reducer = (state, action) => {
         ...state,
         selectedOtherSearchValues: isExist ?
         state.selectedOtherSearchValues.filter(value => value.id !== entityId || value.type !== payload.entityType) :
-        [...state.selectedOtherSearchValues, {id: entityId, type: payload.entityType}],
+        [...state.selectedOtherSearchValues, {id: entityId, type: payload.entityType, name: payload.entityName}],
         restaurantsLoading: true
       }
     }

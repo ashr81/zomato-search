@@ -54,6 +54,10 @@ const Home = ({
             <ToggleSwitch uniqueId='checkbox-search-type' checked={!isSearchTypeRestaurant} onChange={onSearchTypeChange}/>
             <Text ml={2} fontSize={1}>{`Change search to ${isSearchTypeRestaurant ? 'cuisines, category and locality' : 'restaurants'}`}</Text>
           </Flex>
+          <Flex ml={[2, 4]} mt={2}>
+            <Text fontSize={1} mr={2} fontWeight='bold'>Selected Cuisines, Categories: </Text>
+            <Text fontSize={1}>{selectedOtherSearchValues.map(i => i.name).join(', ')}</Text>
+          </Flex>
         </Flex>
         {!selectedLocation.id ? <LocationModal open={true} /> : null}
         <RestaurantsModal open={!!selectedRestaurant.id} onClose={onCloseRestaurantModal} restaurant={selectedRestaurant}/>
