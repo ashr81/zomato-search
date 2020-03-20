@@ -18,6 +18,7 @@ export const colors = {
     navbarBg: '#000000',
     navbarColor: '#F7F7F8',
     textColor: '#000000',
+    textDark: '#000',
     modalOverlayBg: '#000',
     modalBg: '#fff',
     inputPrefixBg: '#fff'
@@ -30,7 +31,7 @@ export const colors = {
     fontSizes: [10, 12, 14, 16, 18, 24, 30, 36, 72],
     textStyles: {
       secondary: {
-        color: colors.textColor,
+        color: 'textColor',
         cursor: 'pointer',
         textTransform: 'capitalize',
         "&:hover": {

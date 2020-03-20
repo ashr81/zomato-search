@@ -22,7 +22,8 @@ Text.defaultProps = {
   fontSize: 3,
   as: 'p',
   my: 0,
-  py: 0
+  py: 0,
+  color: 'textColor'
 }
 
 export default Text;

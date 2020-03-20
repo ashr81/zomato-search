@@ -18,8 +18,10 @@ const colors = {
     navbarBg: '#0464dd',
     navbarColor: '#FFF',
     textColor: '#FFF',
+    textDark: '#000',
     modalOverlayBg: '#000',
-    modalBg: '#fff'
+    modalBg: '#fff',
+    inputPrefixBg: '#fff'
   }
   
   export default colors;

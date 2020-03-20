@@ -81,45 +81,45 @@ const HomePage = () => {
     })
   }, [dispatch])
 
-  // useFetchAPI(
-  //   selectedLocation.id,
-  //   [
-  //     {url: API_CATEGORIES},
-  //     {url: API_CUISINES, params: { city_id: selectedLocation.id }}
-  //   ],
-  //   (response) => {
-  //     dispatch({
-  //       type: ADD_OTHER_SEARCH_OPTIONS,
-  //       categories: response[0],
-  //       cuisines: response[1]
-  //     })
-  //   }
-  // )
+  useFetchAPI(
+    selectedLocation.id,
+    [
+      {url: API_CATEGORIES},
+      {url: API_CUISINES, params: { city_id: selectedLocation.id }}
+    ],
+    (response) => {
+      dispatch({
+        type: ADD_OTHER_SEARCH_OPTIONS,
+        categories: response[0],
+        cuisines: response[1]
+      })
+    }
+  )
    
   // No API call required when search_type is others.
-  // useDebouceThrottleFetchAPI(
-  //   state.restaurantsLoading ? state.primarySearchValue || state.selectedOtherSearchValues.length : false,
-  //   {
-  //     url: API_SEARCH,
-  //     params: {
-  //       q: state.primarySearchValue,
-  //       entity_id: selectedLocation.id,
-  //       entity_type: 'city',
-  //       cuisines: state.selectedOtherSearchValues.filter(value => value.type === ENTITY_CUISINES).map(value => value.id).join(','),
-  //       category: state.selectedOtherSearchValues.filter(value => value.type === ENTITY_CATEGORIES).map(value => value.id).join(','),
-  //       sort: state.sortBy,
-  //       order: state.sortOrder
-  //     }
-  //   },
-  //   (response) => {
-  //     if(response.config.params.q === state.primarySearchValue) {
-  //       dispatch({
-  //         type: ADD_RESTAURANTS,
-  //         data: response.data
-  //       })
-  //     }
-  //   }
-  // )
+  useDebouceThrottleFetchAPI(
+    state.restaurantsLoading ? state.primarySearchValue || state.selectedOtherSearchValues.length : false,
+    {
+      url: API_SEARCH,
+      params: {
+        q: state.primarySearchValue,
+        entity_id: selectedLocation.id,
+        entity_type: 'city',
+        cuisines: state.selectedOtherSearchValues.filter(value => value.type === ENTITY_CUISINES).map(value => value.id).join(','),
+        category: state.selectedOtherSearchValues.filter(value => value.type === ENTITY_CATEGORIES).map(value => value.id).join(','),
+        sort: state.sortBy,
+        order: state.sortOrder
+      }
+    },
+    (response) => {
+      if(response.config.params.q === state.primarySearchValue) {
+        dispatch({
+          type: ADD_RESTAURANTS,
+          data: response.data
+        })
+      }
+    }
+  )
 
   useDebouceThrottleFetchAPI(
     state.citySearchLoading ? state.citySearchValue : false,

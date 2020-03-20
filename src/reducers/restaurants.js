@@ -657,8 +657,8 @@ export const initialState = {
   restaurants: [],
   restaurantsLoading: false,
   otherSearchOptions: {
-    cuisines: CUISINES_MOCK_DATA.cuisines.map(({ cuisine }) => ({id: cuisine.cuisine_id, name: cuisine.cuisine_name})),
-    categories: CATEGORIES_MOCK_DATA.categories.map(category => category.categories)
+    cuisines: [], // CUISINES_MOCK_DATA.cuisines.map(({ cuisine }) => ({id: cuisine.cuisine_id, name: cuisine.cuisine_name})),
+    categories: [], // CATEGORIES_MOCK_DATA.categories.map(category => category.categories)
   },
   sortBy: '',
   order: 'asc',
@@ -683,8 +683,8 @@ const reducer = (state, action) => {
         searchType: state.searchType === SEARCH_TYPES.RESTAURANT ? SEARCH_TYPES.OTHERS : SEARCH_TYPES.RESTAURANT,
         selectedPrimarySearchValue: state.searchType === SEARCH_TYPES.RESTAURANT ? state.selectedRestaurant : state.selectedOtherSearchValues,
         primarySearchValue: '',
-        restaurants: restaurants.restaurants.map(option => option.restaurant), // NOTE:: change this to empty []
-        restaurantsLoading: state.searchType !== SEARCH_TYPES.RESTAURANT // NOTE:: change this to state.searchType === SEARCH_TYPES.RESTAURANT
+        restaurants: [],
+        restaurantsLoading: state.searchType === SEARCH_TYPES.RESTAURANT
       }
     }
     case ADD_OTHER_SEARCH_OPTIONS: {
