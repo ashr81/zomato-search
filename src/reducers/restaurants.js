@@ -87,10 +87,8 @@ const reducer = (state, action) => {
     case CLOSE_RESTAURANT_MODAL: {
       return {
         ...state,
-        restaurants: state.searchType === SEARCH_TYPES.RESTAURANT ? [] : state.restaurants,
         selectedRestaurant: {},
         restaurantsLoading: false,
-        primarySearchValue: state.searchType === SEARCH_TYPES.RESTAURANT ? '' : state.primarySearchValue,
       };
     }
     case SELECT_RESTAURANT: {
