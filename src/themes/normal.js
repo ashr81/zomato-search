@@ -15,6 +15,7 @@ export const colors = {
   listCellHoverBg: '#C8CDE5',
   primaryBtnHoverBg: '#045bc7',
   toggleSwitchBg: '#045bc7',
+  toggleBg: '#bebebe',
   navbarBg: '#000000',
   navbarColor: '#F7F7F8',
   textColor: '#000000',

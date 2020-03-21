@@ -15,6 +15,7 @@ const colors = {
   listCellHoverBg: '#1e1e21',
   primaryBtnHoverBg: '#045bc7',
   toggleSwitchBg: '#045bc7',
+  toggleBg: '#bebebe',
   navbarBg: '#0464dd',
   navbarColor: '#FFF',
   textColor: '#FFF',
