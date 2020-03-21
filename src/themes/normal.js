@@ -32,7 +32,6 @@ export default {
   fontSizes: [10, 12, 14, 16, 18, 24, 30, 36, 72],
   textStyles: {
     secondary: {
-      color: 'textColor',
       cursor: 'pointer',
       textTransform: 'capitalize',
       '&:hover': {
@@ -40,7 +39,7 @@ export default {
         fontWeight: 'bold',
       },
       '&[data-selected=true]': {
-        color: colors.success,
+        color: colors.primaryBtnBg,
         fontWeight: 'bold',
       },
     },

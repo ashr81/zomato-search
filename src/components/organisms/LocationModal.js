@@ -72,6 +72,7 @@ const LocationModal = () => {
     <Modal open={!selectedLocation.id}>
       <Flex flexDirection='column'>
         <SearchInput
+          uniqueId='location-modal-search-city'
           width="100%"
           mb={4}
           px={4}

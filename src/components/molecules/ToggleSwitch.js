@@ -51,7 +51,7 @@ const ToggleSwitchLabel = styled.label`
   }
 `;
 
-const CheckboxHidden = styled.input`
+const CheckboxHidden = styled.input.attrs(() => ({ type: 'checkbox' }))`
   width: 100%;
   height: 100%;
   opacity: 0;
@@ -77,8 +77,8 @@ const ToggleSwitch = ({
   pseudoElementsContent, uniqueId,
 }) => (
   <ToggleSwitchContainer checked={checked} pseudoElementsContent={pseudoElementsContent}>
-    <CheckboxHidden type='checkbox' id={uniqueId} checked={checked} onChange={onChange} />
-    <ToggleSwitchLabel htmlFor={uniqueId} />
+    <CheckboxHidden id={uniqueId} checked={checked} onChange={onChange} />
+    <ToggleSwitchLabel htmlFor={uniqueId} aria-label='checkbox'/>
   </ToggleSwitchContainer>
 );
 

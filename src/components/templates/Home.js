@@ -27,6 +27,7 @@ const Home = ({
     <>
       <Flex flexDirection={['column', 'row']} width={['100%', '500px', '800px']}>
         <SearchInput
+          uniqueId='search-city'
           mr={[2, 4]}
           ml={[2, 0]}
           selectedValue={selectedLocation}
@@ -38,6 +39,7 @@ const Home = ({
         />
         <Flex flexDirection="column" flexGrow={2}>
           <SearchInput
+            uniqueId='search-restaurants-cuisines-categories'
             ml={[2, 4]}
             mr={[2, 0]}
             helpText={isSearchTypeRestaurant ? null : '*Only locality is allowed.'}
