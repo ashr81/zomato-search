@@ -1,3 +1,7 @@
+/**
+ * Filters for restaurant search page.
+ * contains sortby, sortorder and filter on rating options.
+ */
 import React from 'react';
 import { Flex, Text, Input } from '../../atoms';
 import { RadioOptions } from '../../molecules';

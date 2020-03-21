@@ -1,3 +1,7 @@
+/**
+ * Axios wrapper to make API calls.
+ */
+
 import axios from 'axios';
 
 const request = (options) => {

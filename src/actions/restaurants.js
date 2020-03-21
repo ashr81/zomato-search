@@ -1,3 +1,8 @@
+/**
+ * Contains constants required that are used to make actions inside 
+ * reducer and on dispatch callback from 'useReducer'.
+ * feature specific constants.
+ */
 export const SEARCH_TYPES = {
   RESTAURANT: 'RESTAURANT',
   OTHERS: 'OTHERS',

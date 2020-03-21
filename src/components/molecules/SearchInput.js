@@ -1,3 +1,10 @@
+/**
+ * Search input with a dropdown and loading state.
+ * contains a prefix input for the input box.
+ * dropdown is closed on click of outside the
+ * searchbox and dropdown.
+ */
+
 import React, {
   Fragment, useState, useRef, useEffect,
 } from 'react';

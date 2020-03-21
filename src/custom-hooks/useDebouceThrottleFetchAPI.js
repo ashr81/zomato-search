@@ -1,6 +1,8 @@
 /**
  * Custom Hook that makes an API call when the
- * loading flag is updated to true from where it is called.
+ * value is not false and changed flag is updated to
+ * true from where it is called.
+ * Has debouce functionality inbuilt.
  */
 import { useEffect, useRef } from 'react';
 import { toast } from 'react-tiny-toast';

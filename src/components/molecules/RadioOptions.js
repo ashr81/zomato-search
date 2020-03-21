@@ -1,3 +1,7 @@
+/**
+ * Helps in selection of single input.
+ * used in sortBy, sortOrder selection.
+ */
 import React from 'react';
 import { Flex, Text } from '../atoms';
 

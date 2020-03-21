@@ -1,3 +1,6 @@
+/**
+ * reducer used by useReducer for the restaurants or home page.
+ */
 import {
   SEARCH_TYPES, CHANGE_SEARCH_TYPE, CHANGE_CITY_SEARCH_TEXT,
   CHANGE_CITY_SEARCH_OPTIONS, SELECT_CITY, ADD_RESTAURANTS,
@@ -14,8 +17,8 @@ export const initialState = {
   restaurants: [],
   restaurantsLoading: false,
   otherSearchOptions: {
-    cuisines: [], // CUISINES_MOCK_DATA.cuisines.map(({ cuisine }) => ({id: cuisine.cuisine_id, name: cuisine.cuisine_name})),
-    categories: [], // CATEGORIES_MOCK_DATA.categories.map(category => category.categories)
+    cuisines: [],
+    categories: [],
   },
   searchType: SEARCH_TYPES.RESTAURANT,
   citySearchLoading: false,

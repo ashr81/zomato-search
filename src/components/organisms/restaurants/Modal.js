@@ -1,3 +1,6 @@
+/**
+ * onclick of a restaurant modal shows the selected restaurant details.
+ */
 import React from 'react';
 import { Flex, Text, Image } from '../../atoms';
 import { Modal, Carousel } from '../../molecules';

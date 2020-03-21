@@ -1,3 +1,6 @@
+/**
+ * Responsive view for the individual restaurant.
+ */
 import React from 'react';
 import { Flex, Text, Image } from '../../atoms';
 

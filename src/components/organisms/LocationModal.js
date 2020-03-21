@@ -1,3 +1,7 @@
+/**
+ * Collects location modal and update the main location
+ * present withContextDetails higher order component.
+ */
 import React, { useState, useEffect, useCallback } from 'react';
 import { useLocationDetails, useFetchAPI, useDebouceThrottleFetchAPI } from '../../custom-hooks';
 import { Modal, SearchInput } from '../molecules';

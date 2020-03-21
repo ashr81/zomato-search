@@ -1,7 +1,7 @@
 /**
  * To keep device data across view which is providers from
- * `withContextProvidersHOC.tsx` and consumed through
- * custom-hook: `useDeviceDetails.tsx`
+ * `withLocationDetails.js` and consumed through
+ * custom-hook: `useLocationDetails.js`
  */
 import { createContext } from 'react';
 

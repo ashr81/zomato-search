@@ -1,3 +1,6 @@
+/**
+ * Restaurant search dropdown restaurant selection view.
+ */
 import React from 'react';
 import styled from 'styled-components';
 import { Flex, Text, Image } from '../../atoms';

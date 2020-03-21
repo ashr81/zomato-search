@@ -1,5 +1,5 @@
 /**
- * Theme object required for styled towards styled-components.
+ * Default theme object required for styled towards styled-components.
  */
 export const colors = {
   border: '#B7BBBD',

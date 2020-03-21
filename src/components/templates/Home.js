@@ -1,3 +1,6 @@
+/**
+ * Presentation component for `./pages/HomePage.js`
+ */
 import React, { memo } from 'react';
 import { Flex, Text } from '../atoms';
 import { ToggleSwitch, SearchInput } from '../molecules';
