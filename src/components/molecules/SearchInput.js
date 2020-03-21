@@ -69,13 +69,8 @@ const SearchInput = ({
 
   useEffect(() => {
     const closeDropdown = (event) => {
-      const {
-        left, top, width, height,
-      } = containerRef.current.getBoundingClientRect();
-      if (
-        event.clientX < left || event.clientX > (left + width)
-        || event.clientY < top || event.clientY > (top + height)
-      ) {
+      // checks whether the event targt is present inside the main container.
+      if (containerRef.current && !containerRef.current.contains(event.target)) {
         updateDropdownOpen(false);
       }
     };
