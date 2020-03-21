@@ -4,8 +4,7 @@ module.exports = {
         "es6": true
     },
     "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended",
+        "react-app",
         "airbnb",
         "plugin:jsx-a11y/recommended"
     ],

@@ -9,7 +9,7 @@ const RestuarantGridView = ({
   all_reviews_count: reviewsCount,
 }) => (
   <Flex cursor="pointer" backgroundColor="listCellBg" data-id={id} onClick={onClick} my={4} mx={[2, 2, 0]} py={4} px={2} alignItems={['center', 'center', 'unset']} flexDirection={['column', 'column', 'row']}>
-    <Image m={2} src={thumb} size={6} />
+    <Image m={2} src={thumb} size={6} alt={name}/>
     <Flex flexGrow={1}>
       <Flex flexDirection="column" px={4} mt={[1, 1, 4]}>
         <Text as="h3" fontWeight="bold" fontSize={[3, 3, 6]} color="danger" py={0} my={0}>{name}</Text>

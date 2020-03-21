@@ -10,7 +10,7 @@ const RestaurantModal = ({
   return (
     <Modal open={open} onClose={onClose}>
       <Flex flexDirection={['column', 'row']} alignItems={['center', 'unset']}>
-        <Image mx={4} mt={4} src={restaurant.thumb} size={7} />
+        <Image mx={4} mt={4} src={restaurant.thumb} size={7} alt={restaurant.name}/>
         <Flex flexDirection="column" flexGrow={1}>
           <Flex mt={4}>
             <Flex flexDirection="column" px={4} flexGrow={1}>

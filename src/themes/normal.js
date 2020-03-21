@@ -79,7 +79,7 @@ export default {
   },
   fontWeights: {
     regular: 400,
-    bold: 600,
+    bold: 700,
     extraBold: 900,
   },
   radii: [0, 1, 2, 4, 8, 16],

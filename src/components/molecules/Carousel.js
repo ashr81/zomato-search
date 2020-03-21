@@ -16,7 +16,7 @@ const Carousel = ({
   const countOfImagesToShow = 3;
   return (
     <CarouselContainer width="100%">
-      {images.slice(0, countOfImagesToShow).map((image, index) => <ImageExtended pr={3} key={index} size={width} src={image} />)}
+      {images.slice(0, countOfImagesToShow).map((image, index) => <ImageExtended pr={3} key={index} size={width} src={image} alt={`carousel-preview-${index}`}/>)}
       {images.length > countOfImagesToShow ? (
         <Text alignItems="center" color="danger">
           +

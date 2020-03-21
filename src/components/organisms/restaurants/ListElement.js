@@ -16,7 +16,7 @@ const RestaurantListElement = ({
   id,
 }) => (
   <ListElementContainer p={3} data-id={id} onClick={onSelectOption}>
-    <Image src={thumb} size={4} />
+    <Image src={thumb} size={4} alt={name}/>
     <Flex flexDirection="column" ml={3}>
       <Text as="h6" my={0} py={0} color="textDark">{name}</Text>
       <Text my={0} py={0} fontSize={1} color="textDark">{cuisines}</Text>
