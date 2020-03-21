@@ -35,7 +35,7 @@ const InputPrefix = styled(Text)`
 `;
 
 const UnorderedList = styled(Flex).attrs(() => ({
-  as: 'ul', my: 0, px: 0, maxHeight: ['200px', '400px'],
+  as: 'ul', my: 0, px: 0, maxHeight: ['500px', '400px', '600px'],
 }))`
   flex-direction: column;
   width: 100%;
