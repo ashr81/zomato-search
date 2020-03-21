@@ -21,7 +21,7 @@ const useDebouceThrottleFetchAPI = (
             onSuccess(response);
           } catch (err) {
             toast.show(err.message, { variant: 'danger' });
-            onError(err);
+            onError && onError(err);
           }
         }());
       }

@@ -19,6 +19,7 @@ const useFetchAPI = (
           .then(onSuccess)
           .catch((err) => {
             toast.show(err.message, { variant: 'danger' });
+            onError && onError(err)
           });
       } else {
         // when options are object. only single API call is enough.
@@ -28,7 +29,7 @@ const useFetchAPI = (
             onSuccess(response);
           } catch (err) {
             toast.show(err.message, { variant: 'danger' });
-            onError(err);
+            onError && onError(err);
           }
         }());
       }

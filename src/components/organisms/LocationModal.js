@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useLocationDetails, useFetchAPI, useDebouceThrottleFetchAPI } from '../../custom-hooks';
 import { Modal, SearchInput } from '../molecules';
-import { Flex } from '../atoms';
+import { Flex, Button, Text } from '../atoms';
 import { API_CITIES } from '../../routes/api';
 
 const LocationModal = () => {
@@ -10,6 +10,7 @@ const LocationModal = () => {
   const [locationInput, updateLocationInput] = useState('');
   const [loadingOptions, updateLoadingOptions] = useState(false);
   const [options, updateOptions] = useState([]);
+  const [locationError, updateLocationError] = useState('')
 
   useFetchAPI(!!locationCoordinates.latitude, {
     url: API_CITIES,
@@ -22,15 +23,17 @@ const LocationModal = () => {
       updateLocationInput(response.data.location_suggestions[0].name);
       updateSelectedLocation(response.data.location_suggestions[0]);
     }
+  }, (error) => {
+    updateLocationError(error?.response?.data?.message || error.message)
   });
 
-  useEffect(() => {
-    if (!selectedLocation.id) {
-      window.navigator.geolocation.getCurrentPosition((location) => {
-        updateLocationCoordinates(location.coords);
-      });
-    }
-  }, [selectedLocation.id, updateLocationCoordinates]);
+  const onClickFetchLocation = () => {
+    window.navigator.geolocation.getCurrentPosition((location) => {
+      updateLocationCoordinates(location.coords);
+    }, (error) => {
+      updateLocationError(error.message)
+    });
+  }
 
   useEffect(() => {
     if (locationInput) updateLoadingOptions(true);
@@ -54,8 +57,9 @@ const LocationModal = () => {
         updateLoadingOptions(false);
       }
     },
-    () => {
+    (error) => {
       updateLoadingOptions(false);
+      updateLocationError(error?.response?.data?.message || error.message)
     },
   );
 
@@ -66,7 +70,7 @@ const LocationModal = () => {
 
   return (
     <Modal open={!selectedLocation.id}>
-      <Flex>
+      <Flex flexDirection='column'>
         <SearchInput
           width="100%"
           mb={4}
@@ -78,6 +82,10 @@ const LocationModal = () => {
           options={options}
           onSelectOption={onSelectOption}
         />
+        <Flex justifyContent='flex-end' alignItems='flex-start'>
+          <Text m={0} p={0} color='danger' fontSize={1} mr={3}>{locationError}</Text>
+          <Button alignSelf='flex-end' cursor='pointer' onClick={onClickFetchLocation} mb={4} mr={4} p={3}>Fetch Location</Button>
+        </Flex>
       </Flex>
     </Modal>
   );
