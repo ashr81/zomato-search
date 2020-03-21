@@ -5,9 +5,9 @@ import { ToastContainer } from 'react-tiny-toast';
 import publicRoutes from './routes/public';
 import { normal } from './themes';
 import NotFoundPage from './pages/error/NotFoundPage';
-import Layout from './components/organisms/Layout';
-import Navbar from './components/organisms/Navbar';
+import { Layout, Navbar } from './components/organisms';
 import withLocationDetails from './hocs/withLocationDetails';
+import withSuspenseLoader from './hocs/withSuspenseLoader';
 
 const App = () => {
   const [theme, updateTheme] = useState(normal);
@@ -26,4 +26,4 @@ const App = () => {
   );
 };
 
-export default withLocationDetails(App);
+export default withSuspenseLoader(withLocationDetails(App));

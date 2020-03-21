@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { Flex, Text } from '../atoms';
 import { ToggleSwitch, SearchInput } from '../molecules';
 import { SEARCH_TYPES } from '../../actions/restaurants';
-import LocationModal from '../organisms/LocationModal';
+import { LocationModal } from '../organisms';
 import {
   RestaurantsListElement, RestaurantsModal,
   RestaurantsGridView, RestaurantsFilter,
