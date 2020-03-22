@@ -77,12 +77,14 @@ const SearchInput = ({
   useEffect(() => {
     const closeDropdown = (event) => {
       // checks whether the event targt is present inside the main container.
-      if (containerRef.current && !containerRef.current.contains(event.target)) {
+      // Finds any modal is open to avoid closing search list when clicking on it.
+      const modalChildrenElementCount = document.getElementById('modal-root').childElementCount
+      if (containerRef.current && !containerRef.current.contains(event.target) && modalChildrenElementCount === 0) {
         updateDropdownOpen(false);
       }
     };
-    window.addEventListener('click', closeDropdown);
-    return () => window.removeEventListener('click', closeDropdown);
+    window.addEventListener('click', closeDropdown, true);
+    return () => window.removeEventListener('click', closeDropdown, true);
   }, [containerRef, updateDropdownOpen]);
   return (
     <FlexContainer ref={containerRef} {...props} onClick={() => updateDropdownOpen(true)}>
